@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="IAM-02-Create-Users-Table" author="Andrei Tirpescu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT count(*) FROM information_schema.schemata WHERE schema_name = 'identities';
+            </sqlCheck>
+            <not>
+                <tableExists tableName="users" />
+            </not>
+        </preConditions>
+
+        <sql>
+            CREATE TYPE identities.user_role AS ENUM('ADMIN', 'STANDARD');
+            CREATE TYPE identities.user_status AS ENUM('INACTIVE', 'PENDING_ACTIVATION', 'ACTIVE');
+        </sql>
+
+        <createTable tableName="users" schemaName="identities">
+            <column name="id" type="uuid" defaultValue="gen_random_uuid()">
+                <constraints nullable="false" unique="true" primaryKey="true" />
+            </column>
+            <column name="email" type="varchar(64)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="password" type="varchar(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="role" type="identities.user_role">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="identities.user_status">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
