@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="view/components">
+        <file>Input.qml</file>
+        <file>AppButton.qml</file>
+    </qresource>
+</RCC>

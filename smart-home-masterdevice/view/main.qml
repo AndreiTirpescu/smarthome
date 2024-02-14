@@ -3,6 +3,8 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.3
 
+import './components' as Components
+
 ApplicationWindow {
     id: mainWindow
     width: 800
@@ -10,7 +12,6 @@ ApplicationWindow {
     // flags: Qt.FramelessWindowHint
     visible: true
     title: "MasterDevice"
-
 
     StackView {
         id: pageContainer
@@ -23,51 +24,28 @@ ApplicationWindow {
             color: "#FFFFFF"
 
             ColumnLayout {
-                spacing: 8
+                spacing: 24
                 anchors.centerIn: parent
 
-                TextField {
-                    Layout.preferredWidth: 430
-                    Layout.preferredHeight: 48
-                    padding: 4
-                    background: Rectangle {
-                        color: "#FFFFFF"
-                        border.width: 1
-                        border.color: "#E8E8E8"
-                        radius: 6
-                    }
+                Layout.alignment: Qt.AlignCenter
+
+                Components.Input {
+                    w: 430
+                    h: 48
+                    label: "Email"
                 }
 
-                TextField {
-                    Layout.preferredWidth: 430
-                    Layout.preferredHeight: 48
-                    padding: 4
-                    background: Rectangle {
-                        color: "#FFFFFF"
-                        border.width: 1
-                        border.color: "#E8E8E8"
-                        radius: 6
-                    }
+                Components.Input {
+                    w: 430
+                    h: 48
+                    type: TextInput.Password
+                    label: "Password"
                 }
 
-                Button {
+                Components.AppButton {
+                    label: "Continue"
                     Layout.preferredWidth: 430
                     Layout.preferredHeight: 48
-                    padding: 4
-
-                    Text {
-                        id: label
-                        text: qsTr("Continue")
-                        anchors.centerIn: parent
-                        color: "#FFFFFF"
-                    }
-
-                    background: Rectangle {
-                        color: "#3dabff"
-                        border.width: 1
-                        border.color: "#E8E8E8"
-                        radius: 6
-                    }
                 }
             }
 

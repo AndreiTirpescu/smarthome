@@ -1,6 +1,7 @@
 #include "ChangelogRunner.h"
 #include "DbConnection.h"
 #include <QDebug>
+#include <QFontDatabase>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
@@ -11,6 +12,12 @@ int main(int argc, char* argv[])
 {
     QGuiApplication application(argc, argv);
     QQmlApplicationEngine engine;
+
+    QFont workSansFont { "WorkSans" };
+    workSansFont.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
+    workSansFont.setStyleStrategy(QFont::StyleStrategy::PreferQuality);
+
+    QGuiApplication::setFont(workSansFont);
 
     const auto db = std::make_shared<config::DbConnection>(DB_PATH);
 
