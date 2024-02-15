@@ -1,30 +1,24 @@
 #include "ChangelogRunner.h"
 #include "DbConnection.h"
-#include <QDebug>
-#include <QFontDatabase>
+#include "HomeSystemApplicationConfig.h"
+
 #include <QGuiApplication>
+#include <QProcessEnvironment>
 #include <QQmlApplicationEngine>
 
-static constexpr const char* DB_PATH = "/home/andrei/work/smarthome/masterdevice.db";
-static constexpr const char* path = "resources/changelogs";
+using Configurator = config::HomeSystemApplicationConfig;
+
+static const std::string DB_PATH = "MHS_DB_PATH";
 
 int main(int argc, char* argv[])
 {
     QGuiApplication application(argc, argv);
     QQmlApplicationEngine engine;
 
-    QFont workSansFont { "WorkSans" };
-    workSansFont.setHintingPreference(QFont::HintingPreference::PreferNoHinting);
-    workSansFont.setStyleStrategy(QFont::StyleStrategy::PreferQuality);
+    const auto db = std::make_shared<config::DbConnection>(Configurator::getEnv(DB_PATH));
 
-    QGuiApplication::setFont(workSansFont);
-
-    const auto db = std::make_shared<config::DbConnection>(DB_PATH);
-
-    {
-        auto changelogRunner = config::ChangelogRunner(db, path);
-        changelogRunner.runChangelogs();
-    }
+    Configurator::applyFont();
+    Configurator::runChangelogsOnStartup(db);
 
     engine.load(QUrl(QStringLiteral("qrc:view/main.qml")));
 

@@ -1,35 +1,36 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-
-
+import QtQuick 6.0
+import QtQuick.Window 6.0
+import QtQuick.Controls 6.0
 
 Column {
     id: root
-    spacing: 8
 
-    property alias w: field.width
     property alias h: field.height
-    property alias type: field.echoMode
     property alias label: input_label.text
+    property alias type: field.echoMode
+    property alias w: field.width
+
+    spacing: 8
 
     Text {
         id: input_label
-        font.weight: 500
-        font.pointSize: 10.5
-    }
 
+        font.pointSize: 10.5
+        font.weight: 500
+    }
     TextField {
         id: field
+
+        color: "#000"
+        font.pointSize: 12
+        height: h
         padding: 4
         width: w
-        height: h
-        font.pointSize: 12
 
         background: Rectangle {
-            color: "#FFFFFF"
-            border.width: 1
             border.color: "#E8E8E8"
+            border.width: 1
+            color: "#FFFFFF"
             radius: 6
         }
     }

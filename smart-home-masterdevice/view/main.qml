@@ -1,54 +1,60 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.3
-
-import './components' as Components
+import QtQuick 6.0
+import QtQuick.Window 6.0
+import QtQuick.Controls 6.0
+import QtQuick.Layouts 6.0
+// import QtQuick.VirtualKeyboard
+// import QtQuick.VirtualKeyboard.Settings
+import "./components" as Components
 
 ApplicationWindow {
     id: mainWindow
-    width: 800
+
     height: 480
+    title: "MasterDevice"
     // flags: Qt.FramelessWindowHint
     visible: true
-    title: "MasterDevice"
+    width: 800
 
-    StackView {
-        id: pageContainer
-        width: mainWindow.width
-        height: mainWindow.height
+    Item {
+        id: appContents
 
-        initialItem: Rectangle {
-            id: randomRectangle
-            anchors.fill: parent
-            color: "#FFFFFF"
+        anchors.fill: parent
 
-            ColumnLayout {
-                spacing: 24
-                anchors.centerIn: parent
+        StackView {
+            id: pageContainer
 
-                Layout.alignment: Qt.AlignCenter
+            height: mainWindow.height
+            width: mainWindow.width
 
-                Components.Input {
-                    w: 430
-                    h: 48
-                    label: "Email"
-                }
+            initialItem: Rectangle {
+                id: randomRectangle
 
-                Components.Input {
-                    w: 430
-                    h: 48
-                    type: TextInput.Password
-                    label: "Password"
-                }
+                anchors.fill: parent
+                color: "#FFFFFF"
 
-                Components.AppButton {
-                    label: "Continue"
-                    Layout.preferredWidth: 430
-                    Layout.preferredHeight: 48
+                ColumnLayout {
+                    Layout.alignment: Qt.AlignCenter
+                    anchors.centerIn: parent
+                    spacing: 24
+
+                    Components.Input {
+                        h: 48
+                        label: "Email"
+                        w: 430
+                    }
+                    Components.Input {
+                        h: 48
+                        label: "Password"
+                        type: TextInput.Password
+                        w: 430
+                    }
+                    Components.AppButton {
+                        Layout.preferredHeight: 48
+                        Layout.preferredWidth: 430
+                        label: "Continue"
+                    }
                 }
             }
-
         }
     }
 }

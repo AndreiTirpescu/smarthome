@@ -1,11 +1,11 @@
 #include "DbConnection.h"
 
-config::DbConnection::DbConnection(const char* dbPath)
+config::DbConnection::DbConnection(const std::string& dbPath)
 {
     qDebug() << "Opening db connection to" << dbPath;
 
     dbConn = QSqlDatabase::addDatabase("QSQLITE");
-    dbConn.setDatabaseName(dbPath);
+    dbConn.setDatabaseName(dbPath.c_str());
 
     dbConn.open();
 }

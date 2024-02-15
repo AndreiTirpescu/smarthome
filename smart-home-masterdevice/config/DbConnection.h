@@ -10,7 +10,7 @@ namespace config {
 
 class DbConnection {
 public:
-    DbConnection(const char* dbPath);
+    DbConnection(const std::string& dbPath);
 
     QSqlQuery query(const std::string& queryString);
 
