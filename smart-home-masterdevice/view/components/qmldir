@@ -1,0 +1,3 @@
+module AppComponents
+Input 1.0 Input.qml
+AppButton 1.0 AppButton.qml

@@ -1,6 +1,7 @@
 <RCC>
-    <qresource prefix="view/components">
+    <qresource prefix="/AppComponents">
         <file>Input.qml</file>
         <file>AppButton.qml</file>
+        <file>qmldir</file>
     </qresource>
 </RCC>

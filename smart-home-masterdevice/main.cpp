@@ -20,6 +20,7 @@ int main(int argc, char* argv[])
     Configurator::applyFont();
     Configurator::runChangelogsOnStartup(db);
 
+    engine.addImportPath("qrc:/");
     engine.load(QUrl(QStringLiteral("qrc:view/main.qml")));
 
     return QCoreApplication::exec();

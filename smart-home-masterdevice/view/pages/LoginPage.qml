@@ -2,9 +2,9 @@ import QtQuick 6.0
 import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
-import "./components" as Components
+import AppComponents 1.0
 
-Rectangle {
+Item {
     id: randomRectangle
 
     anchors.fill: parent
@@ -15,18 +15,18 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 24
 
-        Components.Input {
+        Input {
             h: 48
             label: "Email"
             w: 430
         }
-        Components.Input {
+        Input {
             h: 48
             label: "Password"
             type: TextInput.Password
             w: 430
         }
-        Components.AppButton {
+        AppButton {
             Layout.preferredHeight: 48
             Layout.preferredWidth: 430
             label: "Continue"

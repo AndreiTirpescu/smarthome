@@ -19,7 +19,7 @@ set(RESOURCES_TARGET_DIR resources)
 
 find_package(Qt${QT_VERSION} COMPONENTS ${QT_REQUIRED_COMPONENTS} REQUIRED)
 
-add_executable(masterdevice main.cpp main.qrc view/components/components.qrc)
+add_executable(masterdevice main.cpp main.qrc view/components/components.qrc view/pages/pages.qrc)
 add_subdirectory(deviceaccess)
 add_subdirectory(config)
 target_link_libraries(masterdevice ${QT_LINK_LIBS})

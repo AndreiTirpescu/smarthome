@@ -2,7 +2,8 @@ import QtQuick 6.0
 import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
-import "./pages" as Pages
+import AppComponents 1.0
+import AppPages 1.0
 
 ApplicationWindow {
     id: mainWindow
