@@ -7,6 +7,7 @@ Column {
 
     property alias h: field.height
     property alias label: input_label.text
+    property alias text: field.text
     property alias type: field.echoMode
     property alias w: field.width
 

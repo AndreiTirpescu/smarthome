@@ -16,11 +16,13 @@ set(QT_LINK_LIBS Qt${QT_VERSION}::Core Qt${QT_VERSION}::Quick Qt${QT_VERSION}::S
 
 set(RESOURCES_PATH ${CMAKE_SOURCE_DIR}/resources)
 set(RESOURCES_TARGET_DIR resources)
-
+set(QRC_FILES main.qrc view/components/components.qrc view/pages/pages.qrc)
 find_package(Qt${QT_VERSION} COMPONENTS ${QT_REQUIRED_COMPONENTS} REQUIRED)
 
-add_executable(masterdevice main.cpp main.qrc view/components/components.qrc view/pages/pages.qrc)
-add_subdirectory(deviceaccess)
+add_executable(masterdevice main.cpp ${QRC_FILES})
+
+add_subdirectory(features)
+add_subdirectory(framework)
 add_subdirectory(config)
 target_link_libraries(masterdevice ${QT_LINK_LIBS})
 
