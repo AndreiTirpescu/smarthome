@@ -24,6 +24,7 @@ add_executable(masterdevice main.cpp ${QRC_FILES})
 add_subdirectory(features)
 add_subdirectory(framework)
 add_subdirectory(config)
+add_subdirectory(mapper)
 target_link_libraries(masterdevice ${QT_LINK_LIBS})
 
 add_custom_command(

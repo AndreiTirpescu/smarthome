@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
+#include "ErrorResponseMapper.h"
 #include "NetworkRequestBuilder.h"
 #include <memory>
 #include <utility>
@@ -29,15 +30,25 @@ void deviceaccess::UserLoginComponent::login(const QString& email, const QString
 
     const QJsonObject body = { { "email", email }, { "password", password } };
     auto resp = authClient->post(request, QJsonDocument(body).toJson());
-    connect(resp, &QNetworkReply::readyRead, this, &UserLoginComponent::onAuthResponse);
-    
+
+    connect(resp, &QNetworkReply::readyRead, this, &UserLoginComponent::onNetworkResponse);
+    connect(resp, &QNetworkReply::errorOccurred, this, &UserLoginComponent::onNetworkError);
+    connect(this, &UserLoginComponent::error, resp, &QObject::deleteLater);
+
     qDebug() << email << " " << password;
 }
 
-void deviceaccess::UserLoginComponent::onAuthResponse()
+void deviceaccess::UserLoginComponent::onNetworkResponse()
 {
     const auto reply = dynamic_cast<QNetworkReply*>(QObject::sender());
-    qDebug() << reply->readAll().toStdString() << "SenderOBJ" << reply;
+    const auto rawData = reply->readAll();
+    const auto data = QJsonDocument::fromJson(rawData);
 
-    reply->deleteLater();
+    if (data["status"] != 200) {
+        auto errDetails = mappers::ErrorResponseMapper::fromResponse(data);
+        emit error(QString(errDetails.key.c_str()));
+        return;
+    }
 }
+
+void deviceaccess::UserLoginComponent::onNetworkError() { emit error("There was a problem with the server"); }

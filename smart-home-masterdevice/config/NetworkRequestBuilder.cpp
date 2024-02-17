@@ -6,6 +6,7 @@ config::NetworkRequestBuilder::NetworkRequestBuilder(std::string url)
     , rawHeaderMap({})
 {
     rawHeaderMap["Content-Type"] = "application/json";
+    rawHeaderMap["Accepts"] = "application/json";
 }
 
 config::NetworkRequestBuilder& config::NetworkRequestBuilder::authenticated(const QString& accessToken)

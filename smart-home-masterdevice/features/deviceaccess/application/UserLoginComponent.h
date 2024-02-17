@@ -29,7 +29,8 @@ private:
     TokenProviderPtr accessTokenProvider;
     NetworkAccessPtr authClient;
 
-    void onAuthResponse();
+    void onNetworkResponse();
+    void onNetworkError();
 };
 }
 
