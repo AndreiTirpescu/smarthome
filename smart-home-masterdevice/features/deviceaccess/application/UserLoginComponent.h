@@ -2,20 +2,21 @@
 #define MASTERDEVICE_USERLOGINCOMPONENT_H
 
 #include <QDebug>
+#include <QNetworkAccessManager>
 #include <QObject>
 
-class QNetworkAccessManager;
+using NetworkAccessPtr = QNetworkAccessManager*;
 
 namespace deviceaccess {
 
 class IAccessTokenProvider;
 
-using TokenProviderPtr = std::shared_ptr<IAccessTokenProvider>;
+using TokenProviderPtr = std::shared_ptr<deviceaccess::IAccessTokenProvider>;
 
 class UserLoginComponent : public QObject {
     Q_OBJECT
 public:
-    explicit UserLoginComponent(TokenProviderPtr accessTokenProvider);
+    UserLoginComponent(QObject* parent, TokenProviderPtr accessTokenProvider, NetworkAccessPtr networkClient);
 
     Q_INVOKABLE void login(const QString& email, const QString& password);
 
@@ -26,7 +27,9 @@ signals:
 
 private:
     TokenProviderPtr accessTokenProvider;
-    std::unique_ptr<QNetworkAccessManager> authClient;
+    NetworkAccessPtr authClient;
+
+    void onAuthResponse();
 };
 }
 

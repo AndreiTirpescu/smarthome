@@ -3,10 +3,18 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 
-deviceaccess::UserLoginComponent::UserLoginComponent(deviceaccess::TokenProviderPtr accessTokenProvider)
+#include "NetworkRequestBuilder.h"
+#include <memory>
+#include <utility>
+
+using RequestBuilder = config::NetworkRequestBuilder;
+
+deviceaccess::UserLoginComponent::UserLoginComponent(
+    QObject* parent, TokenProviderPtr accessTokenProvider, NetworkAccessPtr networkClient)
     : accessTokenProvider(std::move(accessTokenProvider))
-    , authClient(std::make_unique<QNetworkAccessManager>(this))
+    , authClient(networkClient)
 {
 }
 
@@ -17,9 +25,19 @@ void deviceaccess::UserLoginComponent::login(const QString& email, const QString
         return;
     }
 
-    QNetworkRequest request { QUrl("http://localhost:8080/api/v1/auth/login") };
+    const auto request = RequestBuilder("http://localhost:8080/api/v1/auth/login").build();
+
     const QJsonObject body = { { "email", email }, { "password", password } };
-    authClient->post(request, QJsonDocument(body).toJson());
+    auto resp = authClient->post(request, QJsonDocument(body).toJson());
+    connect(resp, &QNetworkReply::readyRead, this, &UserLoginComponent::onAuthResponse);
     
     qDebug() << email << " " << password;
+}
+
+void deviceaccess::UserLoginComponent::onAuthResponse()
+{
+    const auto reply = dynamic_cast<QNetworkReply*>(QObject::sender());
+    qDebug() << reply->readAll().toStdString() << "SenderOBJ" << reply;
+
+    reply->deleteLater();
 }

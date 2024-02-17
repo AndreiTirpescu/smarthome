@@ -5,6 +5,8 @@
 #include "framework/deviceaccess/SqliteAccessTokenProvider.h"
 
 #include <QGuiApplication>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
 #include <QProcessEnvironment>
 #include <QQmlApplicationEngine>
 
@@ -24,12 +26,14 @@ int main(int argc, char* argv[])
     Configurator::runChangelogsOnStartup(db);
 
     const TokenProviderPtr tokenProvider = std::make_shared<framework::SqliteAccessTokenProvider>(db);
-    const TokenProviderPtr tokenProvider1 = std::make_shared<framework::SqliteAccessTokenProvider>(db);
-    const TokenProviderPtr tokenProvider2 = std::make_shared<framework::SqliteAccessTokenProvider>(db);
-    const TokenProviderPtr tokenProvider3 = std::make_shared<framework::SqliteAccessTokenProvider>(db);
+    const auto networkClient = new QNetworkAccessManager(&application);
 
-    qmlRegisterSingletonType<deviceaccess::UserLoginComponent>("device.access", 1, 0, "UserLogin",
-        [=](QQmlEngine*, QJSEngine*) -> QObject* { return new deviceaccess::UserLoginComponent(tokenProvider); });
+    QObject::connect(&application, &QGuiApplication::destroyed, networkClient, &QNetworkAccessManager::deleteLater);
+
+    qmlRegisterSingletonType<deviceaccess::UserLoginComponent>(
+        "device.access", 1, 0, "UserLogin", [&](QQmlEngine*, QJSEngine*) -> QObject* {
+            return new deviceaccess::UserLoginComponent(&application, tokenProvider, networkClient);
+        });
 
     engine.addImportPath("qrc:/");
     engine.load(QUrl(QStringLiteral("qrc:view/main.qml")));
