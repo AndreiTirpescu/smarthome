@@ -1,5 +1,6 @@
 #include "UserLoginComponent.h"
 #include <IAccessTokenProvider.h>
+#include <QIODevice>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -29,13 +30,12 @@ void deviceaccess::UserLoginComponent::login(const QString& email, const QString
     const auto request = RequestBuilder("http://localhost:8080/api/v1/auth/login").build();
 
     const QJsonObject body = { { "email", email }, { "password", password } };
-    auto resp = authClient->post(request, QJsonDocument(body).toJson());
+    auto reply = authClient->post(request, QJsonDocument(body).toJson());
 
-    connect(resp, &QNetworkReply::readyRead, this, &UserLoginComponent::onNetworkResponse);
-    connect(resp, &QNetworkReply::errorOccurred, this, &UserLoginComponent::onNetworkError);
-    connect(this, &UserLoginComponent::error, resp, &QObject::deleteLater);
+    emit loginStarted();
 
-    qDebug() << email << " " << password;
+    connect(reply, &QNetworkReply::finished, this, &UserLoginComponent::onNetworkResponse);
+    connect(this, &UserLoginComponent::error, reply, &QObject::deleteLater);
 }
 
 void deviceaccess::UserLoginComponent::onNetworkResponse()
@@ -44,11 +44,26 @@ void deviceaccess::UserLoginComponent::onNetworkResponse()
     const auto rawData = reply->readAll();
     const auto data = QJsonDocument::fromJson(rawData);
 
-    if (data["status"] != 200) {
-        auto errDetails = mappers::ErrorResponseMapper::fromResponse(data);
-        emit error(QString(errDetails.key.c_str()));
+    if (reply->error() == QNetworkReply::NetworkError::ConnectionRefusedError) {
+        emit error(QString("There was a problem with the server"));
+
         return;
     }
+
+    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
+        auto errDetails = mappers::ErrorResponseMapper::fromResponse(data);
+        emit error(QString(errDetails.key.c_str()));
+
+        return;
+    }
+
+    accessTokenProvider->saveToken(
+        data["accessToken"].toString().toStdString(), data["refreshToken"].toString().toStdString());
+    emit loginFinished();
 }
 
-void deviceaccess::UserLoginComponent::onNetworkError() { emit error("There was a problem with the server"); }
+void deviceaccess::UserLoginComponent::onNetworkError(QNetworkReply::NetworkError code)
+{
+    qDebug() << code;
+    emit error(QString("There was a problem with the server"));
+}

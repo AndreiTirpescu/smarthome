@@ -5,16 +5,22 @@ import QtQuick.Layouts 6.0
 import AppComponents 1.0
 import device.access 1.0
 
-Rectangle {
+Page {
     id: randomRectangle
 
+    signal loginSuccess
+
     anchors.fill: parent
-    color: "#FFFFFF"
+
+    background: Rectangle {
+        color: "#FFFFFF"
+    }
 
     ColumnLayout {
         Layout.alignment: Qt.AlignCenter
         anchors.centerIn: parent
         spacing: 24
+        visible: !loading.visible
 
         Input {
             id: email
@@ -50,9 +56,23 @@ Rectangle {
             }
         }
     }
+    Rectangle {
+        id: loading
+
+        anchors.fill: parent
+        color: "#FF0000"
+        visible: false
+    }
     Connections {
         function onError(errStr) {
             error_label.text = errStr;
+            loading.visible = false;
+        }
+        function onLoginFinished() {
+            loading.visible = true;
+        }
+        function onLoginStarted() {
+            loading.visible = true;
         }
 
         target: UserLogin

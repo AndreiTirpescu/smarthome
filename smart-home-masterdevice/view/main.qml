@@ -14,7 +14,7 @@ ApplicationWindow {
     visible: true
     width: 800
 
-    Item {
+    Page {
         id: appContents
 
         anchors.fill: parent

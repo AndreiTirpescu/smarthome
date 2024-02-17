@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QObject>
 
 using NetworkAccessPtr = QNetworkAccessManager*;
@@ -30,7 +31,7 @@ private:
     NetworkAccessPtr authClient;
 
     void onNetworkResponse();
-    void onNetworkError();
+    void onNetworkError(QNetworkReply::NetworkError code);
 };
 }
 

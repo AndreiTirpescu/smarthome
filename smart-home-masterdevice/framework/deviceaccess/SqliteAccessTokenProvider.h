@@ -17,6 +17,7 @@ public:
     explicit SqliteAccessTokenProvider(DbConnectionPtr dbConnection);
 
     AccessTokenPtr storedAccessToken() override;
+    AccessTokenPtr saveToken(const std::string& accessToken, const std::string& refreshToken) override;
 
 private:
     DbConnectionPtr dbConnection;
