@@ -19,6 +19,7 @@
         <module>web</module>
         <module>identity-and-access</module>
         <module>common</module>
+        <module>device_catalog</module>
     </modules>
 
     <properties>
@@ -70,6 +71,12 @@
             <dependency>
                 <groupId>com.mysmarthome</groupId>
                 <artifactId>identity-and-access</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mysmarthome</groupId>
+                <artifactId>device_catalog</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
