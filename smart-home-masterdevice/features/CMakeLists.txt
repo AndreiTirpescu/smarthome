@@ -6,6 +6,8 @@ target_sources(${PROJECT_NAME} PRIVATE
         deviceaccess/domain/IAccessTokenProvider.h
         deviceaccess/application/UserLoginComponent.h
         deviceaccess/application/UserLoginComponent.cpp
+        devicesetup/domain/DeviceSetupConfig.h
+        devicesetup/domain/DeviceSetupConfig.cpp
         )
 
 target_include_directories(${PROJECT_NAME} PRIVATE deviceaccess/usecases deviceaccess/domain)

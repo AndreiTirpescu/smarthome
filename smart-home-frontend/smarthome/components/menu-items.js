@@ -13,7 +13,7 @@ const adminItems = [
     {
         key: 'menu_admin_dev',
         link: '/admin/devices',
-        name: 'Device Configuration'
+        name: 'Configuration'
     }
 ]
 
