@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter(AccessLevel.PRIVATE)
 @Getter
 @Entity
-@Table(name = "devices", schema = "device_catalog")
+@Table(name = "devices", schema = "devices")
 public class Device extends AggregateRoot {
 
     @EmbeddedId
