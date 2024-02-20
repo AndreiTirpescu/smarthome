@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan(basePackages = {"com.mysmarthome.devicecatalog.*"})
 @EnableJpaRepositories(basePackages = {"com.mysmarthome.devicecatalog.*"})
-@EntityScan(basePackages = {"com.mysmarthome.identityandaccess.*"})
+@EntityScan(basePackages = {"com.mysmarthome.devicecatalog.*"})
 @PropertySource({"classpath:dev-catalog-application.properties", "classpath:dev-catalog-application-local.properties"})
 public class DeviceCatalogConfiguration {
 }

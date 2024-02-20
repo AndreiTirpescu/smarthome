@@ -19,20 +19,23 @@ import lombok.Setter;
 public class Device extends AggregateRoot {
 
     @EmbeddedId
-    private DeviceId deviceId;
+    private DeviceId id;
 
     private String name;
 
     private String description;
 
-    private Device(DeviceId deviceId, String name, String description) {
-        this.deviceId = deviceId;
+    private String imageUrl;
+
+    private Device(DeviceId id, String name, String description, String imageUrl) {
+        this.id = id;
         this.name = name;
         this.description = description;
+        this.imageUrl = imageUrl;
     }
 
-    public static Device newDeviceType(DeviceId id, String name, String description) {
-        var device = new Device(id, name, description);
+    public static Device newDeviceType(DeviceId id, String name, String description, String imageUrl) {
+        var device = new Device(id, name, description, imageUrl);
 
         device.publishDomainEvent(new DeviceProductCreatedEvent(id.toString(), name));
 
