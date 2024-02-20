@@ -16,4 +16,6 @@ public interface IDomainEvent {
     default String version() {
         return "v1";
     }
+
+    String key();
 }

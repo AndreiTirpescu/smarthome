@@ -1,10 +1,13 @@
 package com.mysmarthome.identityandaccess.application.userauthentication;
 
+import com.mysmarthome.domain.Event;
 import com.mysmarthome.exceptions.SmartHomeException;
 import com.mysmarthome.identityandaccess.application.dtos.TokenResponse;
 import com.mysmarthome.identityandaccess.application.exceptions.ApplicationExceptionCode;
 import com.mysmarthome.identityandaccess.application.mappers.TokenResponseMapper;
 import com.mysmarthome.identityandaccess.domain.aggregate.User;
+import com.mysmarthome.identityandaccess.domain.events.UserAuthenticatedEvent;
+import com.mysmarthome.identityandaccess.domain.infrastructure.IDomainEventPublisher;
 import com.mysmarthome.identityandaccess.domain.infrastructure.IPasswordEncoder;
 import com.mysmarthome.identityandaccess.domain.infrastructure.ITokenGenerator;
 import com.mysmarthome.identityandaccess.domain.infrastructure.IUserRepository;
@@ -34,6 +37,8 @@ public class UserAuthenticationCommandHandler {
 
     private final TokenResponseMapper tokenMapper;
 
+    private final IDomainEventPublisher eventPublisher;
+
     @PostMapping("/login")
     public TokenResponse authenticateUser(@Valid @RequestBody AuthenticateUserCommand command) {
 
@@ -52,6 +57,12 @@ public class UserAuthenticationCommandHandler {
         }
 
         var token = tokenGenerator.generateTokenForUser(toBeAuthenticated);
+
+        eventPublisher.publish(
+                Event.from(new UserAuthenticatedEvent(toBeAuthenticated.getId().toString())).withIdentity(
+                        toBeAuthenticated.getId().toString()
+                )
+        );
 
         return tokenMapper.toResponse(token);
     }
