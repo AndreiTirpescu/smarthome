@@ -28,15 +28,34 @@ function handleAdminRoutes (accessToken, request, role) {
 }
 
 export default function middleware (request) {
+    const { pathname } = request.nextUrl
     const cookieStore = cookies()
     const accessToken = cookieStore.get('accessToken')?.value
     const role = accessToken ? jwtDecode(accessToken).role : null
+    const isExpired = accessToken ? jwtDecode(accessToken).exp > new Date() : true
+    const isPendingActivation = accessToken ? jwtDecode(accessToken).status === 'PENDING_ACTIVATION' : false
 
-    if ((request.nextUrl.pathname === '/' || request.nextUrl.pathname === '') && !accessToken) {
+    if (pathname.startsWith('/_next')) return NextResponse.next()
+
+    if (accessToken && isExpired) {
+        cookieStore.delete('accessToken')
+        cookieStore.delete('refreshToken')
+        return NextResponse.redirect(new URL('/login'))
+    }
+
+    if (accessToken && isPendingActivation && !pathname.startsWith('/activate')) {
+        return NextResponse.redirect(new URL('/activate', request.url))
+    }
+
+    if (!accessToken && pathname.startsWith('/activate')) {
         return NextResponse.redirect(new URL('/login', request.url))
     }
 
-    if (matchesRouteAnyRoute(request.nextUrl.pathname, authenticated)) {
+    if ((pathname === '/' || request.nextUrl.pathname === '') && !accessToken) {
+        return NextResponse.redirect(new URL('/login', request.url))
+    }
+
+    if (matchesRouteAnyRoute(pathname, authenticated)) {
         return handleAuthenticatedRoutes(accessToken, request)
     }
 

@@ -23,14 +23,14 @@ export async function POST (request) {
         // const { expDateStrRefresh, maxAgeRefresh } = dateFromJWT(accessToken)
 
         const serializedAccessToken = serialize('accessToken', accessToken, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: 'strict',
             maxAge: maxAgeFrom(accessToken),
             path: '/'
         })
 
         const serializedRefreshToken = serialize('refreshToken', accessToken, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: 'strict',
             maxAge: maxAgeFrom(accessToken),
             path: '/'

@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.1.1",
     "axios": "^1.6.7",
     "cookie": "^0.6.0",
+    "cookies-next": "^4.1.1",
     "email-validator": "^2.0.4",
     "i18next": "^23.8.2",
     "jwt-decode": "^4.0.0",

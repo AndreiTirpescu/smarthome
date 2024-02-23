@@ -1,7 +1,13 @@
 import Axios from 'axios'
+import { getCookie } from 'cookies-next'
 
 const axiosConfig = (config) => {
+    const token = getCookie('accessToken')
     config.headers.Accept = 'application/json'
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
 
     return config
 }
