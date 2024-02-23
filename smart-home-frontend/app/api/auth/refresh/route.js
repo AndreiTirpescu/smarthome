@@ -1,11 +1,10 @@
-import axios from 'axios'
-import { serializedTokens } from '@/smarthome/lib/sessionMiddleware'
+import axios, { serializedTokens } from '@/smarthome/lib/sessionMiddleware'
 
 export async function POST (request) {
     const { refreshToken: refreshTkn } = await request.json()
 
     try {
-        const authResp = await axios.post('/refresh', { refreshToken: refreshTkn })
+        const authResp = await axios.post('/token/refresh', { refreshToken: refreshTkn })
 
         return new Response(JSON.stringify(authResp.data), {
             status: authResp.data.status,

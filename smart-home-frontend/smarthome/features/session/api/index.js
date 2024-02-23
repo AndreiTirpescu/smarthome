@@ -13,3 +13,7 @@ export const activate = async ({ session, key }) => {
     console.log({ session, key })
     return await backend.patch(`/users/${session.sub}/activation`, { activationToken: key })
 }
+
+export const signup = async ({ email, password }) => {
+    return await backend.post('/users', { email, password })
+}

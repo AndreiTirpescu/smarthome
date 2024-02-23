@@ -4,12 +4,36 @@ import React, { useState } from 'react'
 import Input from '@/smarthome/components/Input'
 import Button from '@/smarthome/components/Button'
 import Link from 'next/link'
+import { signup } from '@/smarthome/features/session/api'
+import { translations } from '@/smarthome/lib'
+import { useRouter } from 'next/navigation'
 
 export default function SignUpInputs () {
     const [signUpInput, setSignUpInput] = useState({ email: '', password: '', confirmedPassword: '' })
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const router = useRouter()
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
+        if (loading) {
+            return
+        }
+        setLoading(true)
+        try {
+            if (signUpInput.password !== signUpInput.confirmedPassword) {
+                setError('Passwords must match')
+                return
+            }
+
+            const { email, password } = signUpInput
+            await signup({ email, password })
+            router.push('/login')
+        } catch (e) {
+            setError(translations[e.response.data.key])
+        }
+
+        setLoading(false)
     }
 
     const onDataChanged = (e) => {
@@ -22,8 +46,9 @@ export default function SignUpInputs () {
             <h3 className={'text-md text-start text-secondary select-none'}>Sign in to your smart home account</h3>
             <Input name={'email'} type={'email'} label={'email'} value={signUpInput.email} onChange={onDataChanged}/>
             <Input name={'password'} type={'password'} label={'password'} value={signUpInput.password} onChange={onDataChanged} />
-            <Input name={'confirm password'} type={'password'} label={'Confirm password'} value={signUpInput.confirmedPassword} onChange={onDataChanged} />
-            <Button label={'Continue'} onClick={onSubmit} />
+            <Input name={'confirmedPassword'} type={'password'} label={'Confirm password'} value={signUpInput.confirmedPassword} onChange={onDataChanged} />
+            {error && <p className={'text-xs text-red-400 font-semibold text-center'}>{error}</p>}
+            <Button label={'Continue'} onClick={onSubmit} loading={loading} />
 
             <Link href={'/login'} className={'text-accent-hover text-sm text-center font-semibold hover:text-accent-active cursor-pointer'}>Back to sign in</Link>
         </>
