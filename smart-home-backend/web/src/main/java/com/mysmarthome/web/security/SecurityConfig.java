@@ -9,11 +9,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,6 +26,8 @@ public class SecurityConfig {
 
     @Value("${security.whiteLabels}")
     private String[] whiteLabels;
+
+    private final SecurityCorsConfiguration corsConfig;
 
     private final TokenAuthFilter tokenAuthFilter;
 
@@ -33,6 +40,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         var http = httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(request -> buildCorsConfig()))
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(manager -> manager.requestMatchers(whiteLabels).permitAll())
                 .addFilterBefore(tokenAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -46,6 +54,15 @@ public class SecurityConfig {
         return http.build();
     }
 
+    private CorsConfiguration buildCorsConfig() {
+        var config = new CorsConfiguration();
+        config.setAllowedOrigins(Arrays.stream(corsConfig.getAllowedOrigins()).toList());
+        config.setAllowedMethods(Arrays.stream(corsConfig.getAllowedMethods()).toList());
+        config.setAllowedHeaders(Arrays.stream(corsConfig.getAllowedHeaders()).toList());
+
+        return config;
+    }
+
     @Bean
     public OpenAPI configureOpenApiAuthorization() {
         return new OpenAPI()
@@ -55,5 +72,4 @@ public class SecurityConfig {
                         )
                 );
     }
-
 }
