@@ -3,25 +3,25 @@
 import React, { useState } from 'react'
 import Input from '@/smarthome/components/Input'
 import Button from '@/smarthome/components/Button'
-import { backend } from '@/smarthome/lib'
 import translations from '@/smarthome/lib/errorkeys'
 import { useRouter } from 'next/navigation'
-import { getCookie } from 'cookies-next'
-import { jwtDecode } from 'jwt-decode'
-import axios from 'axios'
+import { useSession } from '@/smarthome/features/session/hooks/useSession'
+import { useRefreshSession } from '@/smarthome/features/session/hooks/useRefreshSession'
+import { activate } from '@/smarthome/features/session/api'
 
-export default function LoginInputs ({ onSignupClicked }) {
+export default function LoginInputs () {
     const [activationInput, setActivationInput] = useState({ key: '' })
     const [error, setError] = useState('')
     const router = useRouter()
 
+    const session = useSession()
+    const refreshSession = useRefreshSession()
+
     const onSubmit = async (e) => {
         e.preventDefault()
         try {
-            const accessToken = getCookie('accessToken')
-            const refreshToken = getCookie('accessToken')
-            await backend.patch(`/users/${jwtDecode(accessToken).sub}/activation`, { activationToken: activationInput.key })
-            await axios.post('/api/auth/refresh', { refreshToken })
+            await activate({ session, ...activationInput })
+            await refreshSession()
             router.push('/login')
         } catch (e) {
             setError(translations[e.response.data.key])

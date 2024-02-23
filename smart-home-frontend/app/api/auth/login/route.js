@@ -1,43 +1,15 @@
-import axios from 'axios'
-import { jwtDecode } from 'jwt-decode'
-import { serialize } from 'cookie'
-
-const maxAgeFrom = (token) => {
-    const expiryDate = jwtDecode(token).exp
-
-    return expiryDate - Math.floor(Date.now() / 1000)
-}
+import axios, { serializedTokens } from '@/smarthome/lib/sessionMiddleware'
 
 export async function POST (request) {
     const { email, password } = await request.json()
 
     try {
-        const authResp = await axios
-            .post('http://localhost:8080/api/v1/auth/login',
-                { email, password },
-                { headers: { 'Content-Type': 'application/json' } }
-            )
-
-        const { accessToken, refreshToken } = authResp.data
-
-        const serializedAccessToken = serialize('accessToken', accessToken, {
-            httpOnly: false,
-            sameSite: 'strict',
-            maxAge: maxAgeFrom(accessToken),
-            path: '/'
-        })
-
-        const serializedRefreshToken = serialize('refreshToken', refreshToken, {
-            httpOnly: false,
-            sameSite: 'strict',
-            maxAge: maxAgeFrom(refreshToken),
-            path: '/'
-        })
+        const authResp = await axios.post('login', { email, password })
 
         return new Response(JSON.stringify(authResp.data), {
             status: authResp.data.status,
             headers: {
-                'Set-Cookie': [serializedAccessToken, serializedRefreshToken]
+                'Set-Cookie': serializedTokens({ ...authResp.data })
             }
         })
     } catch (e) {

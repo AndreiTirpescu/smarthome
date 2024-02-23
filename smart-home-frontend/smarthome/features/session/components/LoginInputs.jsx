@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 import Input from '@/smarthome/components/Input'
 import Button from '@/smarthome/components/Button'
 import Link from 'next/link'
-import axios from 'axios'
 import translations from '@/smarthome/lib/errorkeys'
 import { useRouter } from 'next/navigation'
+import { login } from '@/smarthome/features/session/api'
 
 export default function LoginInputs () {
     const [loginInput, setLoginInput] = useState({ email: '', password: '' })
@@ -16,7 +16,7 @@ export default function LoginInputs () {
     const onSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('/api/auth/login', { ...loginInput })
+            await login({ ...loginInput })
             router.push('')
         } catch (e) {
             setError(translations[e.response.data.key])
