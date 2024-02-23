@@ -52,10 +52,6 @@ public class UserAuthenticationCommandHandler {
             throw new SmartHomeException(ApplicationExceptionCode.IamInvalidUserCredentials);
         }
 
-        if (UserStatus.PENDING_ACTIVATION == toBeAuthenticated.getStatus()) {
-            throw new SmartHomeException(ApplicationExceptionCode.IamUserAwaitingActivation);
-        }
-
         var token = tokenGenerator.generateTokenForUser(toBeAuthenticated);
 
         eventPublisher.publish(

@@ -9,3 +9,7 @@ IAM_UNAUTHORIZED_EXCEPTION,UNAUTHORIZED,"[{\"param\": \"accessToken\", \"message
 IAM_USER_NOT_FOUND_BY_ID,NOT_FOUND,"[{\"param\": \"id\", \"message\": \"iam_user_id_not_found\"}]"
 IAM_USER_FORBIDDEN,FORBIDDEN,"[{\"param\": \"role\", \"message\": \"iam_user_forbidden_to_access_resource\"}]"
 IAM_USER_AWAITING_ACTIVATION,UNAUTHORIZED,"[{\"param\": \"status\", \"message\": \"iam_user_awaiting_activation\"}]"
+IAM_INACTIVE_USER_CANNOT_ACTIVATE,UNAUTHORIZED,"[{\"param\": \"status\", \"message\": \"iam_user_deactivated\"}]"
+IAM_USER_ALREADY_ACTIVE,BAD_REQUEST,"[{\"param\": \"status\", \"message\": \"iam_user_already_active\"}]"
+IAM_INVALID_ACTIVATION_TOKEN,BAD_REQUEST,"[{\"param\": \"activationToken\", \"message\": \"iam_invalid_activation_token\"}]"
+IAM_ACTIVATION_TOKEN_EXPIRED,BAD_REQUEST,"[{\"param\": \"activationToken\", \"message\": \"iam_activation_token_expired\"}]"

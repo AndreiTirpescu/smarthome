@@ -6,4 +6,5 @@
 
     <include file="changelogs/iam_01_create_identities_schema.xml" relativeToChangelogFile="true" />
     <include file="changelogs/iam_02_create_users_table.xml" relativeToChangelogFile="true" />
+    <include file="changelogs/iam_03_create_activation_token_table.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

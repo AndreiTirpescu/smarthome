@@ -17,7 +17,6 @@ public class UserTokenAuthorizationCommandHandler {
 
     private final TokenResponseMapper mapper;
 
-
     public TokenAuthorizationResponse handle(UserTokenAuthorizationCommand command) {
         var token = command.accessToken();
 
@@ -28,7 +27,12 @@ public class UserTokenAuthorizationCommandHandler {
         try {
             var descriptor = generator.extractUserDescriptorFromToken(token.replace("Bearer ", ""));
 
-            if (UserStatus.ACTIVE != descriptor.status()) {
+            if (UserStatus.ACTIVE == descriptor.status()) {
+                return mapper.responseFrom(descriptor);
+            }
+
+            if (UserStatus.valueOf(command.allowedStatus()) != descriptor.status() ||
+                    UserStatus.INACTIVE == descriptor.status()) {
                 throw new SmartHomeException(ApplicationExceptionCode.IamUserForbidden);
             }
 

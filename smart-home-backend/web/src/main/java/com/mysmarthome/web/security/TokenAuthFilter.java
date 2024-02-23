@@ -10,12 +10,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,6 +28,9 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 
     private final UserTokenAuthorizationCommandHandler iamTokenAuthHandler;
 
+    @Value("${security.pendingActivationWhiteLabels}")
+    private String[] pendingActivationWhiteLabels;
+
     @Override
     @SneakyThrows
     protected void doFilterInternal(@NotNull HttpServletRequest request,
@@ -33,7 +39,12 @@ public class TokenAuthFilter extends OncePerRequestFilter {
         try {
             var requestToken = request.getHeader("Authorization");
 
-            var tokenDetails = iamTokenAuthHandler.handle(new UserTokenAuthorizationCommand(requestToken));
+            var accessCommand = new UserTokenAuthorizationCommand(requestToken, "ACTIVE");
+            if (Arrays.stream(pendingActivationWhiteLabels).anyMatch(path -> new AntPathRequestMatcher(path).matches(request))) {
+                accessCommand = accessCommand.withAllowedStatus("PENDING_ACTIVATION");
+            }
+
+            var tokenDetails = iamTokenAuthHandler.handle(accessCommand);
 
             var authorities = List.of(
                     new SimpleGrantedAuthority(tokenDetails.role().name()),

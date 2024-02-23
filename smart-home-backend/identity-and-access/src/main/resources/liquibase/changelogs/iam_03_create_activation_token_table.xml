@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="IAM-03-Create-Activation-Tokens" author="Andrei Tirpescu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT count(*) FROM information_schema.schemata WHERE schema_name = 'identities';
+            </sqlCheck>
+            <not>
+                <tableExists tableName="activation_tokens" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="activation_tokens" schemaName="identities">
+            <column name="user_id" type="uuid">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="expires_at" type="bigint">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
