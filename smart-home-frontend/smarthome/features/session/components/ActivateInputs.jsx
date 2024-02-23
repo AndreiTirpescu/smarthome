@@ -3,12 +3,12 @@
 import React, { useState } from 'react'
 import Input from '@/smarthome/components/Input'
 import Button from '@/smarthome/components/Button'
-import Link from 'next/link'
 import { backend } from '@/smarthome/lib'
 import translations from '@/smarthome/lib/errorkeys'
 import { useRouter } from 'next/navigation'
 import { getCookie } from 'cookies-next'
 import { jwtDecode } from 'jwt-decode'
+import axios from 'axios'
 
 export default function LoginInputs ({ onSignupClicked }) {
     const [activationInput, setActivationInput] = useState({ key: '' })
@@ -19,17 +19,18 @@ export default function LoginInputs ({ onSignupClicked }) {
         e.preventDefault()
         try {
             const accessToken = getCookie('accessToken')
+            const refreshToken = getCookie('accessToken')
             await backend.patch(`/users/${jwtDecode(accessToken).sub}/activation`, { activationToken: activationInput.key })
-            router.push('')
+            await axios.post('/api/auth/refresh', { refreshToken })
+            router.push('/login')
         } catch (e) {
-            console.log(e)
             setError(translations[e.response.data.key])
         }
     }
 
     const onDataChange = (e) => {
         const { name, value } = e.target
-        setActivationInput({ ...activationInput, [name]: value })
+        setActivationInput({ ...activationInput, [name]: value.toUpperCase() })
     }
 
     return (
@@ -38,10 +39,6 @@ export default function LoginInputs ({ onSignupClicked }) {
             <Input name={'key'} type={'text'} label={'Activation Key'} value={activationInput.key} onChange={onDataChange}/>
             <Button label={'Activate account'} onClick={onSubmit} />
             <p className={'text-xs text-red-400 font-semibold text-center'}>{error}</p>
-            <div className={'flex flex-col gap-2'}>
-                <Link href={'/signup'} className={'text-accent-hover text-sm text-center font-semibold hover:text-accent-active cursor-pointer'}>Don&apos;t have an account? Sign up</Link>
-                <Link href={'/login'} className={'text-accent-hover text-xs text-center font-semibold hover:text-accent-active cursor-pointer'}>Back to Log in</Link>
-            </div>
         </>
     )
 }

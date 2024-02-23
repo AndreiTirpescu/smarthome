@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface TokenResponseMapper {
 
-    TokenResponse toResponse(Token token);
+    TokenResponse responseFrom(Token token);
 
     TokenAuthorizationResponse responseFrom(UserDescriptor userDescriptor);
 }

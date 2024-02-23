@@ -27,6 +27,13 @@ function handleAdminRoutes (accessToken, request, role) {
     }
 }
 
+function clearAndRedirectToLogin (cookieStore, request) {
+    cookieStore.delete('accessToken')
+    cookieStore.delete('refreshToken')
+
+    return NextResponse.redirect(new URL('/login', request))
+}
+
 export default function middleware (request) {
     const { pathname } = request.nextUrl
     const cookieStore = cookies()
@@ -35,12 +42,14 @@ export default function middleware (request) {
     const isExpired = accessToken ? jwtDecode(accessToken).exp > new Date() : true
     const isPendingActivation = accessToken ? jwtDecode(accessToken).status === 'PENDING_ACTIVATION' : false
 
+    if (pathname.startsWith('/api')) {
+        return
+    }
+
     if (pathname.startsWith('/_next')) return NextResponse.next()
 
     if (accessToken && isExpired) {
-        cookieStore.delete('accessToken')
-        cookieStore.delete('refreshToken')
-        return NextResponse.redirect(new URL('/login'))
+        return clearAndRedirectToLogin(cookieStore, request.url)
     }
 
     if (accessToken && isPendingActivation && !pathname.startsWith('/activate')) {

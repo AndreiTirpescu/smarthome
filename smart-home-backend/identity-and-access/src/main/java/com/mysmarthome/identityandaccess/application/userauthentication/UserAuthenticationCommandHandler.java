@@ -60,6 +60,6 @@ public class UserAuthenticationCommandHandler {
                 )
         );
 
-        return tokenMapper.toResponse(token);
+        return tokenMapper.responseFrom(token);
     }
 }

@@ -1,4 +1,4 @@
-import { HomeIcon, UserGroupIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, PowerIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { cookies } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
@@ -23,6 +23,12 @@ const allUsers = [
         link: '/',
         name: 'Home',
         icon: <HomeIcon />
+    },
+    {
+        key: 'menu_logout',
+        link: '/logout',
+        name: 'Logout',
+        icon: <PowerIcon />
     }
 ]
 

@@ -19,7 +19,6 @@ export default function LoginInputs () {
             await axios.post('/api/auth/login', { ...loginInput })
             router.push('')
         } catch (e) {
-            console.log(e)
             setError(translations[e.response.data.key])
         }
     }

@@ -9,12 +9,12 @@ const maxAgeFrom = (token) => {
 }
 
 export async function POST (request) {
-    const { email, password } = await request.json()
+    const { refreshToken: refreshTkn } = await request.json()
 
     try {
         const authResp = await axios
-            .post('http://localhost:8080/api/v1/auth/login',
-                { email, password },
+            .post('http://localhost:8080/api/v1/auth/token/refresh',
+                { refreshToken: refreshTkn },
                 { headers: { 'Content-Type': 'application/json' } }
             )
 
