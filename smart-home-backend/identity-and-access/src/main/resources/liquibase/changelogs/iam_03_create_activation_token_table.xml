@@ -25,5 +25,15 @@
                 <constraints nullable="false" />
             </column>
         </createTable>
+
+        <addForeignKeyConstraint baseTableName="activation_tokens"
+                                 baseTableSchemaName="identities"
+                                 baseColumnNames="user_id"
+                                 constraintName="userActivationTokenFK"
+                                 referencedTableName="users"
+                                 referencedTableSchemaName="identities"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+        />
     </changeSet>
 </databaseChangeLog>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -43,9 +44,13 @@ public class CustomExceptionMapper {
         );
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity accessDeniedException(AccessDeniedException e) throws AccessDeniedException {
-        log.info(e.toString());
-        throw e;
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(@NonNull RuntimeException ex) {
+        var details = new ArrayList<ErrorDetails>();
+
+        return new ResponseEntity<>(
+                new ErrorResponse(INVALID_FIELD_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value(), "There was an issue with the server", details),
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
     }
 }

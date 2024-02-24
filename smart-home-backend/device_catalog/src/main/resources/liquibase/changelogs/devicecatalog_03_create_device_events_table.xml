@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="DeviceCatalog-03-Create-Device-Events-Table" author="Andrei Tirpescu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT count(*)
+                FROM information_schema.schemata
+                WHERE schema_name = 'devices';
+            </sqlCheck>
+            <not>
+                <tableExists tableName="device_events"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="device_events" schemaName="devices">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true" />
+            </column>
+            <column name="device_id" type="uuid">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="device_events" schemaName="devices" columnNames="device_id, code" />
+
+        <addForeignKeyConstraint baseTableName="device_events"
+                                 baseTableSchemaName="devices"
+                                 baseColumnNames="device_id"
+                                 constraintName="deviceEventsFK"
+                                 referencedTableName="devices"
+                                 referencedTableSchemaName="devices"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

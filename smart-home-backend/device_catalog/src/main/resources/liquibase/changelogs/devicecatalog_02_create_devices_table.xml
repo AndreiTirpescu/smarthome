@@ -24,6 +24,9 @@
             <column name="description" type="text">
                 <constraints nullable="false" />
             </column>
+            <column name="short_description" type="text">
+                <constraints nullable="false" />
+            </column>
             <column name="image_url" type="VARCHAR(512)">
                 <constraints nullable="false" />
             </column>

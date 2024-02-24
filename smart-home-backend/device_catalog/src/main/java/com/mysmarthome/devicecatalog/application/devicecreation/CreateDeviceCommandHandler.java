@@ -37,6 +37,7 @@ public class CreateDeviceCommandHandler {
         var device = Device.newDeviceType(
                 deviceRepository.nextIdentity(),
                 command.name(),
+                command.shortDescription(),
                 command.description(),
                 ""
         );

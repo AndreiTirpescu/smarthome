@@ -6,4 +6,5 @@
 
     <include file="changelogs/devicecatalog_01_create_devices_schema.xml" relativeToChangelogFile="true" />
     <include file="changelogs/devicecatalog_02_create_devices_table.xml" relativeToChangelogFile="true" />
+    <include file="changelogs/devicecatalog_03_create_device_events_table.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
