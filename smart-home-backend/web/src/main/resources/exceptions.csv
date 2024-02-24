@@ -13,3 +13,7 @@ IAM_INACTIVE_USER_CANNOT_ACTIVATE,UNAUTHORIZED,"[{\"param\": \"status\", \"messa
 IAM_USER_ALREADY_ACTIVE,BAD_REQUEST,"[{\"param\": \"status\", \"message\": \"iam_user_already_active\"}]"
 IAM_INVALID_ACTIVATION_TOKEN,BAD_REQUEST,"[{\"param\": \"activationToken\", \"message\": \"iam_invalid_activation_token\"}]"
 IAM_ACTIVATION_TOKEN_EXPIRED,BAD_REQUEST,"[{\"param\": \"activationToken\", \"message\": \"iam_activation_token_expired\"}]"
+DEVICE_CATALOG_DEVICE_NOT_FOUND_BY_ID,NOT_FOUND,"[{\"param\": \"id\", \"message\": \"device_catalog_device_not_found_by_id\"}]"
+DEVICE_CATALOG_DEVICE_TYPE_CODE_ALREADY_USED,CONFLICT,"[{\"param\": \"typeCode\", \"message\": \"device_catalog_device_type_code_exceptions\"}]"
+DEVICE_CATALOG_INVALID_ID,BAD_REQUEST,"[{\"param\": \"id\", \"message\": \"device_catalog_device_id_invalid\"}]"
+DEVICE_CATALOG_DEVICE_EVENT_CODE_ALREADY_USED,CONFLICT,"[{\"param\": \"code\", \"message\": \"device_catalog_device_event_code_already_used\"}]"

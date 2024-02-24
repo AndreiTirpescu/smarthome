@@ -3,7 +3,7 @@ package com.mysmarthome.devicecatalog.application.mappers;
 import com.mysmarthome.devicecatalog.application.dtos.DeviceEventResponse;
 import com.mysmarthome.devicecatalog.application.dtos.DeviceResponse;
 import com.mysmarthome.devicecatalog.domain.aggregate.Device;
-import com.mysmarthome.devicecatalog.domain.valueobjects.DeviceEvent;
+import com.mysmarthome.devicecatalog.domain.model.DeviceEvent;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

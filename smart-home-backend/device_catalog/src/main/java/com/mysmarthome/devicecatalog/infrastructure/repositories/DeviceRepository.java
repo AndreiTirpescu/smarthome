@@ -26,6 +26,11 @@ public class DeviceRepository implements IDeviceRepository {
     }
 
     @Override
+    public boolean existsByTypeCode(String typeCode) {
+        return springDataRepository.existsByTypeCode(typeCode);
+    }
+
+    @Override
     public Device save(Device device) {
         return springDataRepository.save(device);
     }

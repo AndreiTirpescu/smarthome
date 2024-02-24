@@ -5,6 +5,7 @@ import com.mysmarthome.devicecatalog.application.mappers.DeviceResponseMapper;
 import com.mysmarthome.devicecatalog.domain.aggregate.Device;
 import com.mysmarthome.devicecatalog.domain.infrastructure.IDeviceRepository;
 import com.mysmarthome.devicecatalog.domain.infrastructure.IDomainEventPublisher;
+import com.mysmarthome.exceptions.SmartHomeException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.mysmarthome.devicecatalog.application.exceptions.DeviceCatalogApplicationExceptionCode.DeviceCatalogDeviceTypeCodeAlreadyUsed;
 
 @Service
 @RequiredArgsConstructor
@@ -34,9 +37,14 @@ public class CreateDeviceCommandHandler {
     @Operation(security = {@SecurityRequirement(name = "TokenAuthorization")})
     @Transactional
     public DeviceResponse handle(@RequestBody @Valid CreateDeviceCommand command) {
+        if (deviceRepository.existsByTypeCode(command.typeCode())) {
+            throw new SmartHomeException(DeviceCatalogDeviceTypeCodeAlreadyUsed);
+        }
+
         var device = Device.newDeviceType(
                 deviceRepository.nextIdentity(),
                 command.name(),
+                command.typeCode(),
                 command.shortDescription(),
                 command.description(),
                 ""

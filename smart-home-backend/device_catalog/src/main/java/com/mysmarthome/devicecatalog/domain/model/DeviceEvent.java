@@ -1,6 +1,7 @@
-package com.mysmarthome.devicecatalog.domain.valueobjects;
+package com.mysmarthome.devicecatalog.domain.model;
 
 import com.mysmarthome.devicecatalog.domain.aggregate.Device;
+import com.mysmarthome.devicecatalog.domain.valueobjects.DeviceId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

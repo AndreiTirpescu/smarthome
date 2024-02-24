@@ -11,5 +11,7 @@ public interface IDeviceRepository {
 
     Optional<Device> byId(DeviceId id);
 
+    boolean existsByTypeCode(String typeCode);
+
     Device save(Device device);
 }

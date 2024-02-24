@@ -1,7 +1,8 @@
 package com.mysmarthome.devicecatalog.domain.aggregate;
 
+import com.mysmarthome.devicecatalog.domain.events.DeviceEventAddedForProductEvent;
 import com.mysmarthome.devicecatalog.domain.events.DeviceProductCreatedEvent;
-import com.mysmarthome.devicecatalog.domain.valueobjects.DeviceEvent;
+import com.mysmarthome.devicecatalog.domain.model.DeviceEvent;
 import com.mysmarthome.devicecatalog.domain.valueobjects.DeviceId;
 import com.mysmarthome.domain.AggregateRoot;
 import jakarta.persistence.CascadeType;
@@ -35,21 +36,24 @@ public class Device extends AggregateRoot {
 
     private String imageUrl;
 
+    private String typeCode;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DeviceEvent> deviceEvents;
 
-    public Device(DeviceId id, String name, String shortDescription, String description, String imageUrl) {
+    public Device(DeviceId id, String name, String typeCode, String shortDescription, String description, String imageUrl) {
         this.id = id;
         this.name = name;
+        this.typeCode = typeCode;
         this.shortDescription = shortDescription;
         this.description = description;
         this.imageUrl = imageUrl;
     }
 
-    public static Device newDeviceType(DeviceId id, String name, String shortDescription, String description, String imageUrl) {
-        var device = new Device(id, name, shortDescription, description, imageUrl);
+    public static Device newDeviceType(DeviceId id, String name, String typeCode, String shortDescription, String description, String imageUrl) {
+        var device = new Device(id, name, typeCode, shortDescription, description, imageUrl);
 
-        device.publishDomainEvent(new DeviceProductCreatedEvent(id.toString(), name));
+        device.publishDomainEvent(new DeviceProductCreatedEvent(id.toString(), name, typeCode));
 
         return device;
     }
@@ -59,7 +63,7 @@ public class Device extends AggregateRoot {
 
         deviceEvents.add(toBeAdded);
 
-        publishDomainEvent(new DeviceProductCreatedEvent(id.toString(), name));
+        publishDomainEvent(new DeviceEventAddedForProductEvent(id.toString(), name));
 
         return toBeAdded;
     }

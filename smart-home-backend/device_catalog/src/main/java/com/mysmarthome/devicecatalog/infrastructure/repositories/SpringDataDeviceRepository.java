@@ -13,4 +13,6 @@ public interface SpringDataDeviceRepository extends PagingAndSortingRepository<D
     Optional<Device> findById(DeviceId id);
 
     Device save(Device device);
+
+    boolean existsByTypeCode(String typeCode);
 }
