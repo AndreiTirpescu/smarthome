@@ -20,4 +20,8 @@ public record Event(String id, String key, Long createdAt, String identity, Stri
     public String toJson() {
         return new Gson().toJson(this);
     }
+
+    public static Event fromJson(String serialized) {
+        return new Gson().fromJson(serialized, Event.class);
+    }
 }

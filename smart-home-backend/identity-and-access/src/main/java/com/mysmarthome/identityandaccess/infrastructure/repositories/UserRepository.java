@@ -1,5 +1,6 @@
 package com.mysmarthome.identityandaccess.infrastructure.repositories;
 
+import com.mysmarthome.domain.PagedView;
 import com.mysmarthome.identityandaccess.domain.aggregate.User;
 import com.mysmarthome.identityandaccess.domain.infrastructure.IUserRepository;
 import com.mysmarthome.identityandaccess.domain.valueobjects.EmailAddress;
@@ -45,11 +46,11 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public PagedUserView findAllPaged(int pageNumber, int pageSize) {
+    public PagedView<User> findAllPaged(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         var pagedUsers = springDataRepository.findAll(pageable);
 
-        return new PagedUserView(pagedUsers.stream().toList(), pagedUsers.getTotalElements(), pagedUsers.getTotalPages());
+        return new PagedView<>(pagedUsers.stream().toList(), pagedUsers.getTotalElements(), pagedUsers.getTotalPages());
     }
 }

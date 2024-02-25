@@ -20,7 +20,7 @@ public class RabbitMqDomainEventPublisher implements IDomainEventPublisher {
     public void publishDomainEventsFor(User user) {
         user.events()
                 .stream()
-                .map(evt -> Event.from(evt).withIdentity(user.getId().toString()).withApplication("identityandaccess"))
+                .map(evt -> Event.from(evt).withIdentity(user.getId().toString()))
                 .forEach(this::amqpSend);
 
         user.clearEvents();
@@ -32,6 +32,10 @@ public class RabbitMqDomainEventPublisher implements IDomainEventPublisher {
     }
 
     private void amqpSend(Event evt) {
-        amqp.send(configuration.topic, configuration.routingKey, new Message(evt.toJson().getBytes()));
+        amqp.send(
+                configuration.topic,
+                configuration.routingKey,
+                new Message(evt.withApplication("identityandaccess").toJson().getBytes())
+        );
     }
 }

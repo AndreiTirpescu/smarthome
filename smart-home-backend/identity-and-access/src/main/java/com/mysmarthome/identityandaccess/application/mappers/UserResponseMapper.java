@@ -1,5 +1,6 @@
 package com.mysmarthome.identityandaccess.application.mappers;
 
+import com.mysmarthome.domain.PagedView;
 import com.mysmarthome.identityandaccess.application.dtos.PagedUserResponse;
 import com.mysmarthome.identityandaccess.application.dtos.UserResponse;
 import com.mysmarthome.identityandaccess.domain.aggregate.User;
@@ -19,5 +20,8 @@ public interface UserResponseMapper {
     UserResponse responseFrom(User user);
 
 
-    PagedUserResponse pagedResponseFrom(PagedUserView view);
+    @Mappings(
+            @Mapping(source = "data", target = "users")
+    )
+    PagedUserResponse pagedResponseFrom(PagedView<User> view);
 }

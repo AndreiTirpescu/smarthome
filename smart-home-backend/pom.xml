@@ -20,6 +20,7 @@
         <module>identity-and-access</module>
         <module>common</module>
         <module>device_catalog</module>
+        <module>event-store</module>
     </modules>
 
     <properties>
@@ -77,6 +78,12 @@
             <dependency>
                 <groupId>com.mysmarthome</groupId>
                 <artifactId>device_catalog</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mysmarthome</groupId>
+                <artifactId>event-store</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

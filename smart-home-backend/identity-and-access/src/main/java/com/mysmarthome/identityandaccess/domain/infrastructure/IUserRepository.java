@@ -1,5 +1,6 @@
 package com.mysmarthome.identityandaccess.domain.infrastructure;
 
+import com.mysmarthome.domain.PagedView;
 import com.mysmarthome.identityandaccess.domain.aggregate.User;
 import com.mysmarthome.identityandaccess.domain.valueobjects.EmailAddress;
 import com.mysmarthome.identityandaccess.domain.valueobjects.UserId;
@@ -18,5 +19,5 @@ public interface IUserRepository {
 
     User save(User user);
 
-    PagedUserView findAllPaged(int pageNumber, int pageSize);
+    PagedView<User> findAllPaged(int pageNumber, int pageSize);
 }

@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface SpringDataDeviceRepository extends PagingAndSortingRepository<Device, DeviceId> {
 
     Optional<Device> findById(DeviceId id);
+    Optional<Device> findByTypeCode(String typeCode);
 
     Device save(Device device);
 
