@@ -1,10 +1,12 @@
 package com.mysmarthome.devicecatalog.domain.aggregate;
 
 import com.mysmarthome.devicecatalog.domain.events.DeviceEventAddedForProductEvent;
+import com.mysmarthome.devicecatalog.domain.events.DeviceEventRemovedForProductEvent;
 import com.mysmarthome.devicecatalog.domain.events.DeviceProductCreatedEvent;
 import com.mysmarthome.devicecatalog.domain.model.DeviceEvent;
 import com.mysmarthome.devicecatalog.domain.valueobjects.DeviceId;
 import com.mysmarthome.domain.AggregateRoot;
+import com.mysmarthome.exceptions.SmartHomeException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -17,6 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
+import static com.mysmarthome.devicecatalog.domain.exceptions.DeviceCatalogExceptionCode.DeviceCatalogEventTypeDoesNotExistForDevice;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
@@ -66,5 +70,14 @@ public class Device extends AggregateRoot {
         publishDomainEvent(new DeviceEventAddedForProductEvent(id.toString(), name));
 
         return toBeAdded;
+    }
+
+    public void removeEventType(Integer eventType) {
+        var event = deviceEvents.stream().filter(evt -> eventType.equals(evt.code())).findFirst()
+                        .orElseThrow(() -> new SmartHomeException(DeviceCatalogEventTypeDoesNotExistForDevice));
+        event.purge();
+        deviceEvents.remove(event);
+
+        publishDomainEvent(new DeviceEventRemovedForProductEvent(id.toString(), eventType));
     }
 }

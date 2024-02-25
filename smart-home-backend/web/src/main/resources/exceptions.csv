@@ -17,3 +17,4 @@ DEVICE_CATALOG_DEVICE_NOT_FOUND_BY_ID,NOT_FOUND,"[{\"param\": \"id\", \"message\
 DEVICE_CATALOG_DEVICE_TYPE_CODE_ALREADY_USED,CONFLICT,"[{\"param\": \"typeCode\", \"message\": \"device_catalog_device_type_code_exceptions\"}]"
 DEVICE_CATALOG_INVALID_ID,BAD_REQUEST,"[{\"param\": \"id\", \"message\": \"device_catalog_device_id_invalid\"}]"
 DEVICE_CATALOG_DEVICE_EVENT_CODE_ALREADY_USED,CONFLICT,"[{\"param\": \"code\", \"message\": \"device_catalog_device_event_code_already_used\"}]"
+DEVICE_CATALOG_EVENT_TYPE_DOES_NOT_EXIST,NOT_FOUND,"[{\"param\": \"code\", \"message\": \"device_catalog_device_event_code_not_found\"}]"

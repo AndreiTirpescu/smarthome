@@ -56,6 +56,10 @@ public class DeviceEvent implements Serializable {
         return code;
     }
 
+    public void purge() {
+        this.device = null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
