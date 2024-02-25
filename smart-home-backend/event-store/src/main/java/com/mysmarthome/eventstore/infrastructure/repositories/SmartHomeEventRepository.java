@@ -15,8 +15,9 @@ public class SmartHomeEventRepository implements ISmartHomEventRepository {
     private final SpringDataSmartHomeEventRepository springDataRepo;
 
     @Override
-    public PagedView<SmartHomeEvent> allPaged(int pageNumber, int pageSize) {
-        var paged = springDataRepo.findAll(
+    public PagedView<SmartHomeEvent> allPagedByIdentity(String identity, int pageNumber, int pageSize) {
+        var paged = springDataRepo.findAllByIdentity(
+                identity,
                 PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "createdAt"))
         );
 

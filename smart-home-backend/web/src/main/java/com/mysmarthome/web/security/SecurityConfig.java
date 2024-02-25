@@ -1,6 +1,7 @@
 package com.mysmarthome.web.security;
 
 import com.mysmarthome.devicecatalog.application.config.DeviceCatalogSecurityFilters;
+import com.mysmarthome.eventstore.application.config.EventStoreSecurityFilters;
 import com.mysmarthome.identityandaccess.application.config.IamSecurityFilters;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -34,7 +35,10 @@ public class SecurityConfig {
     private final CustomSecurityExceptionHandler customSecurityExceptionHandler;
 
     private final IamSecurityFilters iamSecurityFilters;
+
     private final DeviceCatalogSecurityFilters deviceCatalogSecurityFilters;
+
+    private final EventStoreSecurityFilters eventStoreSecurityFilters;
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
@@ -50,6 +54,7 @@ public class SecurityConfig {
 
         http = iamSecurityFilters.withIamFilters(http);
         http = deviceCatalogSecurityFilters.withDeviceCatalogFilters(http);
+        http = eventStoreSecurityFilters.withEventStoreSecurityFilters(http);
 
         return http.build();
     }
