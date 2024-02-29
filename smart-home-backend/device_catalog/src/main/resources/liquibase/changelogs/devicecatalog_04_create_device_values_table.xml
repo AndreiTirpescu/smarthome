@@ -17,7 +17,7 @@
         </preConditions>
 
         <sql>
-            CREATE TYPE devices.device_value_type AS ENUM('SWITCH', 'RANGE');
+            CREATE TYPE devices.device_value_type AS ENUM('SWITCH', 'RANGE', 'INFO');
         </sql>
 
         <createTable tableName="device_values" schemaName="devices">

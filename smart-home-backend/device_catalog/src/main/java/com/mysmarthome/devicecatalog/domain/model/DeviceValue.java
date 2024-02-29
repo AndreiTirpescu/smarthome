@@ -72,6 +72,9 @@ public class DeviceValue {
             case SWITCH -> {
                 return new SwitchValue(device, label, code, icon);
             }
+            case INFO -> {
+                return new InfoValue(device, label, code, icon);
+            }
             default -> throw new SmartHomeException(DeviceCatalogExceptionCode.DeviceCatalogUnknownDeviceValueType);
         }
     }
