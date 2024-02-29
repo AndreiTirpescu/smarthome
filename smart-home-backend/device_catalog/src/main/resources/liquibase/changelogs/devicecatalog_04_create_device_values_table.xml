@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="DeviceCatalog-04-Create-Device-Values-Table" author="Andrei Tirpescu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT count(*)
+                FROM information_schema.schemata
+                WHERE schema_name = 'devices';
+            </sqlCheck>
+            <not>
+                <tableExists tableName="device_values"/>
+            </not>
+        </preConditions>
+
+        <sql>
+            CREATE TYPE devices.device_value_type AS ENUM('SWITCH', 'RANGE');
+        </sql>
+
+        <createTable tableName="device_values" schemaName="devices">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true" />
+            </column>
+            <column name="device_id" type="uuid">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="label" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="icon" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="devices.device_value_type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="range_min" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="range_max" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="device_values" schemaName="devices" columnNames="device_id, code" />
+
+        <addForeignKeyConstraint baseTableName="device_values"
+                                 baseTableSchemaName="devices"
+                                 baseColumnNames="device_id"
+                                 constraintName="deviceValuesFK"
+                                 referencedTableName="devices"
+                                 referencedTableSchemaName="devices"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

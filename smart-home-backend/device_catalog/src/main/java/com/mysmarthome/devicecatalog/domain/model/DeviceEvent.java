@@ -37,6 +37,7 @@ public class DeviceEvent implements Serializable {
     private DeviceEvent(Device device, String name, int code) {
         this.device = device;
         this.name = name;
+        // @TODO ADD invariant here to set the value to more than x => where x will be defined later (reserved for connectivity/sync)
         this.code = code;
     }
 

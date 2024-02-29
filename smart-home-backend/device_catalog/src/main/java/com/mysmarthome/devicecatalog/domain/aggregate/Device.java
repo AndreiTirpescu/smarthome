@@ -3,14 +3,18 @@ package com.mysmarthome.devicecatalog.domain.aggregate;
 import com.mysmarthome.devicecatalog.domain.events.DeviceEventAddedForProductEvent;
 import com.mysmarthome.devicecatalog.domain.events.DeviceEventRemovedForProductEvent;
 import com.mysmarthome.devicecatalog.domain.events.DeviceProductCreatedEvent;
+import com.mysmarthome.devicecatalog.domain.events.DeviceValueConfiguredEvent;
+import com.mysmarthome.devicecatalog.domain.events.DeviceValueRemovedEvent;
 import com.mysmarthome.devicecatalog.domain.model.DeviceEvent;
+import com.mysmarthome.devicecatalog.domain.model.DeviceValue;
 import com.mysmarthome.devicecatalog.domain.valueobjects.DeviceId;
+import com.mysmarthome.devicecatalog.domain.valueobjects.ValueRange;
+import com.mysmarthome.devicecatalog.domain.valueobjects.ValueType;
 import com.mysmarthome.domain.AggregateRoot;
 import com.mysmarthome.exceptions.SmartHomeException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -20,7 +24,10 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static com.mysmarthome.devicecatalog.domain.exceptions.DeviceCatalogExceptionCode.DeviceCatalogDeviceValueNotFoundByCode;
+import static com.mysmarthome.devicecatalog.domain.exceptions.DeviceCatalogExceptionCode.DeviceCatalogEventTypeAlreadyExists;
 import static com.mysmarthome.devicecatalog.domain.exceptions.DeviceCatalogExceptionCode.DeviceCatalogEventTypeDoesNotExistForDevice;
+import static com.mysmarthome.devicecatalog.domain.exceptions.DeviceCatalogExceptionCode.DeviceCatalogValueTypeAlreadyExists;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
@@ -42,8 +49,11 @@ public class Device extends AggregateRoot {
 
     private String typeCode;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DeviceEvent> deviceEvents;
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DeviceValue> deviceValues;
 
     public Device(DeviceId id, String name, String typeCode, String shortDescription, String description, String imageUrl) {
         this.id = id;
@@ -63,6 +73,12 @@ public class Device extends AggregateRoot {
     }
 
     public DeviceEvent addEventType(String name, int code) {
+        boolean deviceCodeExists = deviceEvents.stream().anyMatch(event -> event.code() == code);
+
+        if (deviceCodeExists) {
+            throw new SmartHomeException(DeviceCatalogEventTypeAlreadyExists);
+        }
+
         var toBeAdded = DeviceEvent.eventFor(this, name, code);
 
         deviceEvents.add(toBeAdded);
@@ -79,5 +95,30 @@ public class Device extends AggregateRoot {
         deviceEvents.remove(event);
 
         publishDomainEvent(new DeviceEventRemovedForProductEvent(id.toString(), eventType));
+    }
+
+    public DeviceValue addDeviceValue(String label, int code, String icon, ValueType type, ValueRange range) {
+        boolean deviceCodeExists = deviceValues.stream().anyMatch(val -> val.code() == code);
+
+        if (deviceCodeExists) {
+            throw new SmartHomeException(DeviceCatalogValueTypeAlreadyExists);
+        }
+
+        var toBeAdded = DeviceValue.valueFor(this, label, code, icon, range, type);
+
+        deviceValues.add(toBeAdded);
+        publishDomainEvent(new DeviceValueConfiguredEvent(id.toString(), label, code, type.name()));
+
+        return toBeAdded;
+    }
+
+    public void removeValueByCode(int code) {
+        var devValue = deviceValues.stream().filter(val -> val.code() == code).findFirst()
+                .orElseThrow(() -> new SmartHomeException(DeviceCatalogDeviceValueNotFoundByCode));
+
+        devValue.purge();
+        deviceValues.remove(devValue);
+
+        publishDomainEvent(new DeviceValueRemovedEvent(id.toString(), code));
     }
 }

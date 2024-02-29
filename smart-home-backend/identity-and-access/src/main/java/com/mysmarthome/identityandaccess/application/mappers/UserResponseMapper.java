@@ -4,7 +4,6 @@ import com.mysmarthome.domain.PagedView;
 import com.mysmarthome.identityandaccess.application.dtos.PagedUserResponse;
 import com.mysmarthome.identityandaccess.application.dtos.UserResponse;
 import com.mysmarthome.identityandaccess.domain.aggregate.User;
-import com.mysmarthome.identityandaccess.domain.views.PagedUserView;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

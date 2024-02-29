@@ -4,7 +4,6 @@ import com.mysmarthome.domain.PagedView;
 import com.mysmarthome.identityandaccess.domain.aggregate.User;
 import com.mysmarthome.identityandaccess.domain.valueobjects.EmailAddress;
 import com.mysmarthome.identityandaccess.domain.valueobjects.UserId;
-import com.mysmarthome.identityandaccess.domain.views.PagedUserView;
 
 import java.util.Optional;
 

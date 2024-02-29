@@ -5,7 +5,6 @@ import com.mysmarthome.identityandaccess.domain.aggregate.User;
 import com.mysmarthome.identityandaccess.domain.infrastructure.IUserRepository;
 import com.mysmarthome.identityandaccess.domain.valueobjects.EmailAddress;
 import com.mysmarthome.identityandaccess.domain.valueobjects.UserId;
-import com.mysmarthome.identityandaccess.domain.views.PagedUserView;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

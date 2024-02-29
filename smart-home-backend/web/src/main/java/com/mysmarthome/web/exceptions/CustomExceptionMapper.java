@@ -48,6 +48,8 @@ public class CustomExceptionMapper {
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(@NonNull RuntimeException ex) {
         var details = new ArrayList<ErrorDetails>();
 
+        log.error(ex.getMessage());
+
         return new ResponseEntity<>(
                 new ErrorResponse(INVALID_FIELD_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value(), "There was an issue with the server", details),
                 HttpStatus.INTERNAL_SERVER_ERROR

@@ -2,6 +2,7 @@ package com.mysmarthome.devicecatalog.application.devicecatalogquery;
 
 import com.mysmarthome.devicecatalog.application.dtos.DeviceEventResponse;
 import com.mysmarthome.devicecatalog.application.dtos.DeviceResponse;
+import com.mysmarthome.devicecatalog.application.dtos.DeviceValueResponse;
 import com.mysmarthome.devicecatalog.application.dtos.PagedDeviceResponse;
 import com.mysmarthome.devicecatalog.application.mappers.DeviceResponseMapper;
 import com.mysmarthome.devicecatalog.domain.infrastructure.IDeviceRepository;
@@ -50,6 +51,15 @@ public class DeviceCatalogQueryService {
                 .orElseThrow(() -> new SmartHomeException(DeviceCatalogDeviceNotFoundById));
 
         return responseMapper.responseFrom(device.getDeviceEvents());
+    }
+
+    @GetMapping("/{id}/values")
+    @Operation(security = {@SecurityRequirement(name = "TokenAuthorization")})
+    public List<DeviceValueResponse> getValuesByDeviceId(@PathVariable String id) {
+        var device = deviceRepository.byId(new DeviceId(id))
+                .orElseThrow(() -> new SmartHomeException(DeviceCatalogDeviceNotFoundById));
+
+        return responseMapper.valuesFrom(device.getDeviceValues());
     }
 
     @Operation(security = {@SecurityRequirement(name = "TokenAuthorization")})
