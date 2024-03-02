@@ -1,19 +1,32 @@
-import { HomeIcon, PowerIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import React from 'react'
-import { cookies } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
+import { Cpu, Home, LogOut, Users } from 'react-feather'
+import { getCookie } from 'cookies-next'
 
 const adminItems = [
+    {
+        key: 'menu_home',
+        link: '/',
+        name: 'Home',
+        icon: <Home />
+    },
     {
         key: 'menu_admin_users',
         link: '/admin/users',
         name: 'Users',
-        icon: <UserGroupIcon />
+        icon: <Users />
     },
     {
         key: 'menu_admin_dev',
         link: '/admin/devices',
-        name: 'Configuration'
+        name: 'Devices',
+        icon: <Cpu />
+    },
+    {
+        key: 'menu_logout',
+        link: '/logout',
+        name: 'Logout',
+        icon: <LogOut />
     }
 ]
 
@@ -22,20 +35,20 @@ const allUsers = [
         key: 'menu_home',
         link: '/',
         name: 'Home',
-        icon: <HomeIcon />
+        icon: <Home />
     },
     {
         key: 'menu_logout',
         link: '/logout',
         name: 'Logout',
-        icon: <PowerIcon />
+        icon: <LogOut />
     }
 ]
 
 const userBasedMenuItems = () => {
-    const accessToken = cookies().get('accessToken')?.value
+    const { role } = { ...jwtDecode(getCookie('accessToken')) }
 
-    return jwtDecode(accessToken).role === 'ADMIN' ? [...allUsers, ...adminItems] : [...allUsers]
+    return role === 'ADMIN' ? adminItems : allUsers
 }
 
 const menuItems = userBasedMenuItems()

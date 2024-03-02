@@ -11,7 +11,7 @@ module.exports = {
             colors: {
                 alto: {
                     DEFAULT: '#E8E8E8',
-                    light: '#fafafa'
+                    light: '#F2F2F2'
                 },
                 secondary: '#040404',
                 primary: '#FFFFFF',

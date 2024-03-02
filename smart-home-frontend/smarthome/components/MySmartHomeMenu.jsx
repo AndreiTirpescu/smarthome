@@ -1,14 +1,12 @@
 import React from 'react'
-import MySmartHomeLogo from '@/smarthome/components/MySmartHomeLogo'
 import List from '@/smarthome/components/List'
 import MenuItemComponent from '@/smarthome/components/MenuItemComponent'
 import menuItems from '@/smarthome/components/menu-items'
 
-export default function MySmartHomeMenu () {
+export default function MySmartHomeMenu ({ isExpanded = true }) {
     return (
-        <div className={'h-screen w-64 p-8 bg-alto-light flex flex-col gap-6'}>
-            <MySmartHomeLogo />
-            <List propName={'menuItem'} items={menuItems} itemComponent={MenuItemComponent} />
+        <div className={`h-full border-r hidden sm:w-auto ${isExpanded && 'lg:w-56'} p-4 sm:flex sm:flex-col sm:gap-6`}>
+            <List propName={'menuItem'} items={menuItems} props={{ expanded: isExpanded }} itemComponent={MenuItemComponent} />
         </div>
     )
 }
