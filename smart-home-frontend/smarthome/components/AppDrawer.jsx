@@ -7,10 +7,10 @@ import List from '@/smarthome/components/List'
 import menuItems from '@/smarthome/components/menu-items'
 import { DrawerItemComponent } from '@/smarthome/components/MenuItemComponent'
 
-const AppDrawer = ({ shouldShow, onRequestClose }) => {
+const AppDrawer = ({ onRequestClose }) => {
     return (
         <>
-            <div className={ `${!shouldShow && 'hidden'} w-screen h-screen bg-black bg-opacity-50 absolute z-10 md:hidden` }>
+            <div className={'w-screen h-screen bg-black bg-opacity-50 absolute z-10 md:hidden' }>
                 <div className={ 'flex flex-row h-14 w-3/4 bg-white items-center align-center gap-6 pl-5 transition ease-in-out delay-150' }>
                     <ClickableIcon icon={ <X/> } onClick={onRequestClose}/>
                     <MySmartHomeLogo/>

@@ -20,6 +20,18 @@ module.exports = {
                     hover: '#1b88f5',
                     active: '#1470e1'
                 }
+            },
+            keyframes: {
+                'slide-in': {
+                    '0%': {
+                        transform: 'translateX(100%)',
+                        opacity: 0
+                    },
+                    '100%': {
+                        transform: 'translateX(0)',
+                        opacity: 1
+                    }
+                }
             }
         }
     },
