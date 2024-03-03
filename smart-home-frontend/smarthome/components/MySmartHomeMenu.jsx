@@ -5,7 +5,7 @@ import menuItems from '@/smarthome/components/menu-items'
 
 export default function MySmartHomeMenu ({ isExpanded = true }) {
     return (
-        <div className={`h-full border-r hidden sm:w-auto ${isExpanded && 'lg:w-56'} p-4 sm:flex sm:flex-col sm:gap-6`}>
+        <div className={`sticky top-0 h-full sm:flex sm:flex-col hidden sm:w-20 ${isExpanded && 'lg:w-56'} p-4 sm:gap-6 border-r`}>
             <List propName={'menuItem'} items={menuItems} props={{ expanded: isExpanded }} itemComponent={MenuItemComponent} />
         </div>
     )

@@ -9,20 +9,22 @@ export default function PageLayout ({ children }) {
     const [expandMenu, setExpandMenu] = useState(false)
 
     return (
-        <main className="h-screen flex flex-col bg-primary">
-            <ToolBoxBar onMenuClicked={() => setExpandMenu(!expandMenu)} />
+        <>
+            <div className="h-screen w-screen">
+                <ToolBoxBar onMenuClicked={() => setExpandMenu(!expandMenu)} />
 
-            <div className={'w-full h-full flex flex-row'}>
-                <MySmartHomeMenu isExpanded={expandMenu} />
+                <main className={'flex h-[calc(100vh-3.5rem)] overflow-y-auto'}>
+                    <MySmartHomeMenu isExpanded={expandMenu} />
 
-                <div className={'flex flex-1 h-full grow overflow-y-auto p-4'}>
-                    {children}
-                </div>
+                    <div className={'w-full px-14 py-6 bg-green-200'}>
+                        {children}
+                    </div>
+                </main>
+
             </div>
-
             {
                 expandMenu && <AppDrawer onRequestClose={() => setExpandMenu(false)} />
             }
-        </main>
+        </>
     )
 }
