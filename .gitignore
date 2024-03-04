@@ -74,3 +74,5 @@ target/
 **/next-env.d.ts
 
 **/cmake-build-debug/
+
+**/package-lock.json
