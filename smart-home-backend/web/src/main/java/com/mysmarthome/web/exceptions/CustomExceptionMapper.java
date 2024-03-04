@@ -18,6 +18,7 @@ import java.util.Map;
 @Slf4j
 public class CustomExceptionMapper {
     private static final String INVALID_FIELD_KEY = "invalid_field";
+    private static final String SERVER_ERROR = "server_error";
 
     private final Map<String, ErrorResponse> exceptionMap;
 

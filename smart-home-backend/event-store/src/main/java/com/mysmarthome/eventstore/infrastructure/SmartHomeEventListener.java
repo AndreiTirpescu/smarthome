@@ -1,10 +1,8 @@
 package com.mysmarthome.eventstore.infrastructure;
 
-import com.google.gson.Gson;
 import com.mysmarthome.domain.Event;
 import com.mysmarthome.eventstore.domain.SmartHomeEvent;
 import com.mysmarthome.eventstore.infrastructure.repositories.SmartHomeEventRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
