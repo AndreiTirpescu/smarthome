@@ -14,6 +14,9 @@ services:
   rabbitmq:
     container_name: smarthome-rabbitmq
     image: rabbitmq:management
+    volumes:
+      - ./rabbitmqconf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmqconf/definitions.json:/etc/rabbitmq/definitions.json
     ports:
       - "5672:5672"
       - "15672:15672"
