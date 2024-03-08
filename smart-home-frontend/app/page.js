@@ -1,5 +1,5 @@
 import React from 'react'
-import PageLayout from '@/smarthome/components/PageLayout'
+import PageLayout from '@/smarthome/components/layout/PageLayout'
 
 export default function Home () {
     return (

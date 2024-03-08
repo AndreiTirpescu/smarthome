@@ -1,8 +1,8 @@
 import React from 'react'
-import List from '@/smarthome/components/List'
-import MenuItemComponent from '@/smarthome/components/MenuItemComponent'
+import List from '@/smarthome/components/simple/List'
+import MenuItemComponent from '@/smarthome/components/menu/MenuItemComponent'
 import menuItems from '@/smarthome/components/menu-items'
-import MySmartHomeLogo from '@/smarthome/components/MySmartHomeLogo'
+import MySmartHomeLogo from '@/smarthome/components/layout/MySmartHomeLogo'
 
 export default function MySmartHomeMenu () {
     return (

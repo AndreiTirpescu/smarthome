@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import Input from '@/smarthome/components/Input'
-import Button from '@/smarthome/components/Button'
+import Input from '@/smarthome/components/simple/Input'
+import Button from '@/smarthome/components/simple/Button'
 import Link from 'next/link'
 
 export default function ForgotPasswordInputs () {

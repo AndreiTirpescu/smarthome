@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import ClickableIcon from '@/smarthome/components/ClickableIcon'
+import ClickableIcon from '@/smarthome/components/simple/ClickableIcon'
 import { X } from 'react-feather'
-import MySmartHomeLogo from '@/smarthome/components/MySmartHomeLogo'
-import List from '@/smarthome/components/List'
+import MySmartHomeLogo from '@/smarthome/components/layout/MySmartHomeLogo'
+import List from '@/smarthome/components/simple/List'
 import menuItems from '@/smarthome/components/menu-items'
-import { DrawerItemComponent } from '@/smarthome/components/MenuItemComponent'
+import { DrawerItemComponent } from '@/smarthome/components/menu/MenuItemComponent'
 
 const AppDrawer = ({ onRequestClose }) => {
     return (

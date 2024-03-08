@@ -1,5 +1,5 @@
 import React from 'react'
-import MySmartHomeLogo from '@/smarthome/components/MySmartHomeLogo'
+import MySmartHomeLogo from '@/smarthome/components/layout/MySmartHomeLogo'
 
 export default function UnauthenticatedForm ({ children }) {
     return (

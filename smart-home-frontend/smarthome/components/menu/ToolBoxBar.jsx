@@ -1,7 +1,7 @@
 import React from 'react'
-import ClickableIcon from '@/smarthome/components/ClickableIcon'
+import ClickableIcon from '@/smarthome/components/simple/ClickableIcon'
 import { Bell, Menu } from 'react-feather'
-import MySmartHomeLogo from '@/smarthome/components/MySmartHomeLogo'
+import MySmartHomeLogo from '@/smarthome/components/layout/MySmartHomeLogo'
 const ToolBoxBar = ({ onMenuClicked }) => {
     return (
         <header className={'h-14 w-full border-b flex justify-between items-center'}>
