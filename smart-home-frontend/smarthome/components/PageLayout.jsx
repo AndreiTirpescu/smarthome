@@ -6,24 +6,24 @@ import AppDrawer from '@/smarthome/components/AppDrawer'
 import ToolBoxBar from '@/smarthome/components/ToolBoxBar'
 
 export default function PageLayout ({ children }) {
-    const [expandMenu, setExpandMenu] = useState(false)
+    const [drawerOpened, setDrawerOpened] = useState(false)
 
     return (
         <>
-            <div className="h-screen w-screen">
-                <ToolBoxBar onMenuClicked={() => setExpandMenu(!expandMenu)} />
+            <div className="h-screen w-screen flex">
+                <MySmartHomeMenu/>
 
-                <main className={'flex h-[calc(100vh-3.5rem)] overflow-y-auto'}>
-                    <MySmartHomeMenu isExpanded={expandMenu} />
+                <main className={'flex flex-col w-full h-screen overflow-y-auto px-4 md:px-14'}>
+                    <ToolBoxBar onMenuClicked={() => setDrawerOpened(!drawerOpened)} />
 
-                    <div className={'w-full px-14 py-6 bg-green-200'}>
+                    <div className={'w-full bg-green-200'}>
                         {children}
                     </div>
                 </main>
 
             </div>
             {
-                expandMenu && <AppDrawer onRequestClose={() => setExpandMenu(false)} />
+                drawerOpened && <AppDrawer onRequestClose={() => setDrawerOpened(false)} />
             }
         </>
     )
