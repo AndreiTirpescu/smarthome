@@ -4,7 +4,7 @@ import React from 'react'
 import PageLayout from '@/smarthome/components/layout/PageLayout'
 import { useFetchUsersPaged } from '@/smarthome/features/users/hooks/useFetchUsersPaged'
 
-export default function AdminUserManagementPage () {
+const AdminUserManagementPage = () => {
     const { isLoading, users } = useFetchUsersPaged(0, 100)
 
     return (
@@ -18,3 +18,5 @@ export default function AdminUserManagementPage () {
         </PageLayout>
     )
 }
+
+export default AdminUserManagementPage
