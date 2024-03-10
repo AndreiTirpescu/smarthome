@@ -1,7 +1,8 @@
 // eslint-disable-next-line camelcase
 import { Work_Sans } from 'next/font/google'
 import React from 'react'
-import './globals.css'
+import '../globals.css'
+import UnauthenticatedPageLayout from '@/smarthome/features/session/components/UnauthenticatedPageLayout'
 
 const font = Work_Sans({ subsets: ['latin'] })
 
@@ -13,7 +14,11 @@ export const metadata = {
 export default function RootLayout ({ children }) {
     return (
         <html lang="en">
-            <body className={font.className}>{children}</body>
+            <body className={font.className}>
+                <UnauthenticatedPageLayout>
+                    {children}
+                </UnauthenticatedPageLayout>
+            </body>
         </html>
     )
 }

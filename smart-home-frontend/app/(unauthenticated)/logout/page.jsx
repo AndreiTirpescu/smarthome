@@ -1,10 +1,9 @@
 'use client'
 import React, { useEffect } from 'react'
-import UnauthenticatedPageLayout from '@/smarthome/features/session/components/UnauthenticatedPageLayout'
 import { deleteCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 
-export default function LoginPage () {
+export default function LogoutPage () {
     const router = useRouter()
 
     useEffect(() => {
@@ -14,6 +13,7 @@ export default function LoginPage () {
     }, [])
 
     return (
-        <UnauthenticatedPageLayout/>
+        <>
+        </>
     )
 }
