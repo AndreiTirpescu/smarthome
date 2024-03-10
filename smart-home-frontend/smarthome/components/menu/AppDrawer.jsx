@@ -12,21 +12,21 @@ const AppDrawer = ({ onRequestClose }) => {
     const session = useSession()
 
     return (
-        <div className={'absolute top-0 z-20 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm md:hidden'}>
-            <div className={'w-1/2 h-full flex flex-col gap-0'}>
-                <div className={'w-full px-4 flex flex-col gap-2 bg-white h-full'}>
-                    <div className={'flex flex-row h-14 w-full bg-white items-center align-center gap-6 transition ease-in-out delay-150'}>
-                        <ClickableIcon icon={ <X/> } onClick={onRequestClose}/>
-                        <MySmartHomeLogo/>
+        <div className={'absolute top-0 z-20 h-screen w-full bg-black bg-opacity-50 backdrop-blur-sm md:hidden'}>
+            <div className={'w-3/4 h-full flex flex-col gap-0'}>
+                <div className={'w-full px-4 flex flex-col bg-white h-full justify-between'}>
+                    <div className={'flex flex-col gap-2'}>
+                        <div className={'flex flex-row h-14 w-full bg-white items-center align-center gap-6 transition ease-in-out delay-150 border-alto border-b'}>
+                            <ClickableIcon icon={ <X/> } onClick={onRequestClose}/>
+                            <MySmartHomeLogo/>
+                        </div>
+
+                        <List propName={'menuItem'} items={session?.role === 'ADMIN' ? [...allUsers, ...adminItems] : allUsers} itemComponent={DrawerItemComponent} />
                     </div>
 
-                    <List propName={'menuItem'} items={allUsers} itemComponent={DrawerItemComponent} />
-                    {
-                        session?.role === 'ADMIN' && (
-                            <List propName={'menuItem'} items={adminItems} itemComponent={DrawerItemComponent} />
-                        )
-                    }
-                    <List propName={'menuItem'} items={[logout]} itemComponent={DrawerItemComponent} />
+                    <div className={'flex flex-col py-4'}>
+                        <List propName={'menuItem'} items={[logout]} itemComponent={DrawerItemComponent} />
+                    </div>
                 </div>
             </div>
         </div>

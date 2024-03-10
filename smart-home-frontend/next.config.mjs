@@ -6,4 +6,8 @@ nextConfig.i18n = {
     defaultLocale: 'en'
 }
 
+nextConfig.env = {
+    BACKEND_BASE_URL_API_V1: process.env.BACKEND_BASE_URL_API_V1
+}
+
 export default nextConfig;

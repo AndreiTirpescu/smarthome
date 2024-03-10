@@ -13,14 +13,7 @@ export default function MySmartHomeMenu () {
             <div className={'flex flex-col gap-6'}>
                 <MySmartHomeLogo className={'hidden lg:block'} />
 
-                <div className={'flex flex-col gap-2'}>
-                    <List propName={'menuItem'} items={allUsers} itemComponent={MenuItemComponent} />
-                    {
-                        session?.role === 'ADMIN' && (
-                            <List propName={'menuItem'} items={adminItems} itemComponent={MenuItemComponent} />
-                        )
-                    }
-                </div>
+                <List propName={'menuItem'} items={session?.role === 'ADMIN' ? [...allUsers, ...adminItems] : allUsers} itemComponent={MenuItemComponent} />
             </div>
 
             <List propName={'menuItem'} items={[logout]} itemComponent={MenuItemComponent} />

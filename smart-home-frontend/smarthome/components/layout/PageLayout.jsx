@@ -16,7 +16,7 @@ export default function PageLayout ({ children }) {
                 <main className={'flex flex-col w-full h-screen overflow-y-auto px-4 md:px-14'}>
                     <ToolBoxBar onMenuClicked={() => setDrawerOpened(!drawerOpened)} />
 
-                    <div className={'w-full bg-green-200 py-4'}>
+                    <div className={'w-full py-14'}>
                         {children}
                     </div>
                 </main>

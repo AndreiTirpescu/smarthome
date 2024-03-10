@@ -16,9 +16,9 @@ module.exports = {
                 secondary: '#040404',
                 primary: '#FFFFFF',
                 accent: {
-                    DEFAULT: '#3dabff',
-                    hover: '#1b88f5',
-                    active: '#1470e1'
+                    DEFAULT: '#3A46C8',
+                    hover: '#202772',
+                    active: '#5A64D1'
                 }
             },
             keyframes: {
