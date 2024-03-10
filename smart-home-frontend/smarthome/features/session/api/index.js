@@ -10,7 +10,6 @@ export const refresh = async ({ refreshToken }) => {
 }
 
 export const activate = async ({ session, key }) => {
-    console.log({ session, key })
     return await backend.patch(`/users/${session.sub}/activation`, { activationToken: key })
 }
 
