@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import { useFetchUsersPaged } from '@/smarthome/features/users/hooks/useFetchUsersPaged'
+import { useFetchUsers } from '@/smarthome/features/users/hooks/useFetchUsers'
 import UsersTable from '@/smarthome/features/users/components/UsersTable'
 
 const AdminUserManagementPage = () => {
-    const { isLoading, users } = useFetchUsersPaged(0, 100)
+    const { isLoading, users } = useFetchUsers(0, 100)
 
     return (
         <div className={ 'flex flex-col w-full gap-4 overflow-x-auto bg-white border border-alto rounded-md' }>

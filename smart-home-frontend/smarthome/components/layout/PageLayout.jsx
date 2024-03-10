@@ -10,13 +10,13 @@ export default function PageLayout ({ children }) {
 
     return (
         <>
-            <div className="h-screen w-screen flex">
+            <div className="h-screen w-screen flex bg-primary">
                 <MySmartHomeMenu/>
 
-                <main className={'flex flex-col w-full h-screen overflow-y-auto px-4 md:px-14'}>
+                <main className={'flex flex-col w-full h-screen overflow-y-auto '}>
                     <ToolBoxBar onMenuClicked={() => setDrawerOpened(!drawerOpened)} />
 
-                    <div className={'w-full py-14'}>
+                    <div className={' w-full px-4 md:px-14 py-6'}>
                         {children}
                     </div>
                 </main>

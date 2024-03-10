@@ -19,6 +19,7 @@ public interface DeviceResponseMapper {
 
     @Mappings({
             @Mapping(expression = "java(device.getId().toString())", target = "id"),
+            @Mapping(expression = "java(device.getShortDescription())", target = "shortDescription"),
     })
     DeviceResponse responseFrom(Device device);
 

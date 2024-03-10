@@ -9,7 +9,7 @@ export default function MySmartHomeMenu () {
     const session = useSession()
 
     return (
-        <div className={'sticky top-0 h-full md:flex md:flex-col hidden md:w-20 lg:w-56 p-4 justify-between sm:gap-6 border-r'}>
+        <div className={'sticky top-0 h-full md:flex md:flex-col hidden md:w-20 lg:w-56 p-4 justify-between sm:gap-6 border-r bg-white'}>
             <div className={'flex flex-col gap-6'}>
                 <MySmartHomeLogo className={'hidden lg:block'} />
 

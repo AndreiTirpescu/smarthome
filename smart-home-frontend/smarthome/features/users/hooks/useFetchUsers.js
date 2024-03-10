@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAllUsers } from '@/smarthome/features/users/api'
 
-export const useFetchUsersPaged = ({ pageNumber, pageSize }) => {
+export const useFetchUsers = ({ pageNumber, pageSize }) => {
     const [userData, setUserData] = useState({
         users: [],
         isLoading: true

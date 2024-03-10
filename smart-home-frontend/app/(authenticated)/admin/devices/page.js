@@ -1,9 +1,18 @@
+'use client'
+
 import React from 'react'
+import { useFetchDevices } from '@/smarthome/features/devices/hooks/useFetchDevices'
+import ItemsView from '@/smarthome/components/view/ListView'
+import DeviceItemComponentListCard from '@/smarthome/features/devices/components/DeviceItemComponentListCard'
 
-export default function AdminDeviceManagementPage () {
+const AdminDeviceManagementPage = () => {
+    const { isLoading, devices } = useFetchDevices(0, 100)
+
     return (
-        <div className={ 'bg-black w-80 h-80' }>
-
+        <div className={ 'flex flex-col w-full gap-4 overflow-x-auto' }>
+            {!isLoading && <ItemsView items={devices} propName={'device'} itemComponent={DeviceItemComponentListCard} />}
         </div>
     )
 }
+
+export default AdminDeviceManagementPage
