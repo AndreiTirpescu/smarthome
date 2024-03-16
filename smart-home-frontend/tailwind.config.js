@@ -10,11 +10,12 @@ module.exports = {
         extend: {
             colors: {
                 alto: {
-                    DEFAULT: '#E8E8E8',
-                    light: '#F2F2F2'
+                    DEFAULT: '#D3D3D3',
+                    light: '#F7F7F7',
+                    dark: '#8B8E92'
                 },
                 secondary: '#040404',
-                primary: '#F9F9F9',
+                primary: '#F4F5F9',
                 accent: {
                     DEFAULT: '#3A46C8',
                     hover: '#202772',

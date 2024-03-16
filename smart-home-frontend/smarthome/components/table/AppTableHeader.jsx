@@ -6,7 +6,7 @@ const AppTableHeader = ({ headers }) => {
             <tr className={'capitalize shadow-sm'}>
                 {
                     headers.map((header, idx) => (
-                        <th key={header.name} className={`text-start ${idx === 0 && 'rounded-l-md'} ${idx === headers.length - 1 && 'rounded-r-md'} p-4 select-none`}>
+                        <th key={header.name} className={`text-sm text-start ${idx === 0 && 'rounded-l-md'} ${idx === headers.length - 1 && 'rounded-r-md'} p-4 select-none`}>
                             {header.name}
                         </th>
                     ))
