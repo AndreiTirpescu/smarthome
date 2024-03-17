@@ -9,14 +9,18 @@ export default function MySmartHomeMenu () {
     const session = useSession()
 
     return (
-        <div className={'sticky top-0 h-full md:flex md:flex-col hidden md:w-20 lg:w-56 p-4 justify-between sm:gap-6 border-r bg-white'}>
-            <div className={'flex flex-col gap-6'}>
-                <MySmartHomeLogo className={'hidden lg:block'} />
+        <div className={'flex-none h-screen bg-menuBackground lg:w-52'}>
+            <div className={'flex flex-col h-full w-full justify-between py-4'}>
+                <div className={'flex flex-col w-full gap-6'}>
+                    <div className={'flex flex-col items-center'}>
+                        <MySmartHomeLogo />
+                    </div>
 
-                <List propName={'menuItem'} items={session?.role === 'ADMIN' ? [...allUsers, ...adminItems] : allUsers} itemComponent={MenuItemComponent} />
+                    <List propName={'menuItem'} items={session?.role === 'ADMIN' ? [...allUsers, ...adminItems] : allUsers} itemComponent={MenuItemComponent} />
+                </div>
+
+                <List propName={'menuItem'} items={[logout]} itemComponent={MenuItemComponent} />
             </div>
-
-            <List propName={'menuItem'} items={[logout]} itemComponent={MenuItemComponent} />
         </div>
     )
 }

@@ -8,7 +8,7 @@ const AdminUserManagementPage = () => {
     const { isLoading, users } = useFetchUsers(0, 100)
 
     return (
-        <div className={ 'flex flex-col w-full gap-4 overflow-x-auto bg-white border border-alto rounded-md' }>
+        <div className={ 'flex flex-col w-full gap-4' }>
             <UsersTable users={ users } isLoading={ isLoading }/>
         </div>
     )

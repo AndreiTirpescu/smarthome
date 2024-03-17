@@ -20,7 +20,10 @@ module.exports = {
                     DEFAULT: '#3A46C8',
                     hover: '#202772',
                     active: '#5A64D1'
-                }
+                },
+                pageBackground: '#F9F9F9',
+                menuItemActive: '#DFDFD1',
+                menuBackground: '#FFFFFF'
             },
             keyframes: {
                 'slide-in': {

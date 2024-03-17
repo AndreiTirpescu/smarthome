@@ -17,7 +17,7 @@ const AppDrawer = ({ onRequestClose }) => {
                 <div className={'w-full px-4 flex flex-col bg-white h-full justify-between'}>
                     <div className={'flex flex-col gap-2'}>
                         <div className={'flex flex-row h-14 w-full bg-white items-center align-center gap-6 transition ease-in-out delay-150 border-alto border-b'}>
-                            <ClickableIcon icon={ <X/> } onClick={onRequestClose}/>
+                            <ClickableIcon icon={ X } onClick={onRequestClose}/>
                             <MySmartHomeLogo/>
                         </div>
 

@@ -4,6 +4,7 @@ import eventsTableConfig from '@/smarthome/features/devices/components/deviceEve
 import AppTable from '@/smarthome/components/table/AppTable'
 import { useFetchDeviceValues } from '@/smarthome/features/devices/hooks/useFetchDeviceValues'
 import valuesTableConfig from '@/smarthome/features/devices/components/deviceValuesTableConfiguration'
+import Card from '@/smarthome/components/simple/Card'
 
 const DevicePreviewItemComponent = ({ device }) => {
     const { eventsCells, eventsHeaders } = eventsTableConfig
@@ -16,7 +17,7 @@ const DevicePreviewItemComponent = ({ device }) => {
     }, [])
 
     return (
-        <div className={'w-full hidden min-h-screen sm:flex flex-col px-8 py-4 gap-6 rounded-md border border-alto bg-white'}>
+        <Card className={'hidden min-h-screen h-full sm:flex flex-col gap-8 rounded-md bg-white'}>
             <div className={'w-full flex items-center justify-center'}>
                 <img alt={''} src={device.imageUrl} className={'rounded-md w-56 shadow-xl h-56 object-cover'} />
             </div>
@@ -27,15 +28,15 @@ const DevicePreviewItemComponent = ({ device }) => {
             <p className={'text-justify text-sm'}>{device.shortDescription}</p>
             <p className={'text-justify text-sm'}>{device.description}</p>
 
-            {!isLoadingEvents && <div className={'w-full border border-alto rounded-md flex flex-col'}>
-                <p className={'text-accent text-xs font-bold px-4 py-4'}>Events</p>
+            {!isLoadingEvents && <Card className={'shadow-lg flex flex-col'}>
+                <p className={'text-accent text-xs font-semibold'}>Events</p>
                 <AppTable items={deviceEvents} cellConfig={[...eventsCells]} headerConfig={eventsHeaders} />
-            </div>}
-            {!isLoadingValues && <div className={'w-full border border-alto rounded-md flex flex-col'}>
-                <p className={'text-accent text-xs font-bold px-4 py-4'}>Values</p>
+            </Card>}
+            {!isLoadingValues && <Card className={'shadow-lg flex flex-col'}>
+                <p className={'text-accent text-xs font-semibold'}>Values</p>
                 <AppTable items={deviceValues} cellConfig={[...valuesCells]} headerConfig={valuesHeaders} />
-            </div>}
-        </div>
+            </Card>}
+        </Card>
     )
 }
 
