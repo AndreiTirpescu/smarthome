@@ -17,7 +17,7 @@ const DevicePreviewItemComponent = ({ device }) => {
     }, [])
 
     return (
-        <Card className={'hidden min-h-screen h-full sm:flex flex-col gap-8 rounded-md bg-white'}>
+        <Card className={'hidden min-h-screen h-full lg:flex flex-col gap-8 rounded-md bg-white'}>
             <div className={'w-full flex items-center justify-center'}>
                 <img alt={''} src={device.imageUrl} className={'rounded-md w-56 shadow-xl h-56 object-cover'} />
             </div>

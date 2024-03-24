@@ -2,9 +2,9 @@ import React from 'react'
 import { Codesandbox, MapPin } from 'react-feather'
 import Card from '@/smarthome/components/simple/Card'
 
-const DeviceListItemView = ({ device }) => {
+const DeviceListItemView = ({ device, selected = false }) => {
     return (
-        <Card className={'h-18 flex gap-6 items-center cursor-pointer group hover:bg-accent-active hover:text-white'}>
+        <Card className={`h-18 flex gap-6 items-center cursor-pointer group hover:bg-accent-active hover:text-white ${selected && 'bg-accent-active text-white'}`}>
             <div className={'border-r border-r-slate-300 w-32 px-4 flex flex-col items-center justify-center'}>
                 <p className={'text-sm font-bold text-accent group-hover:text-white'}>{device.name}</p>
             </div>

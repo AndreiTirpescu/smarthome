@@ -11,7 +11,7 @@ const AppTableCell = ({ itemComponent: ItemComponent, props }) => {
 const DefaultCellRenderer = ({ value }) => {
     return (
         <>
-            <span className={'text-xs text-start'}>{value}</span>
+            <span className={'text-sm text-start'}>{value}</span>
         </>
     )
 }

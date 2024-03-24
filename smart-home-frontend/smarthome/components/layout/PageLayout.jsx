@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import MySmartHomeMenu from '@/smarthome/components/menu/MySmartHomeMenu'
+import AppMenu from '@/smarthome/components/menu/AppMenu'
 import AppDrawer from '@/smarthome/components/menu/AppDrawer'
 import ToolBoxBar from '@/smarthome/components/menu/ToolBoxBar'
 
@@ -11,12 +11,12 @@ export default function PageLayout ({ children }) {
     return (
         <>
             <div className="flex bg-pageBackground">
-                <MySmartHomeMenu/>
+                <AppMenu/>
 
-                <main className={'flex flex-1 w-full h-screen relative overflow-y-auto '}>
+                <main className={'flex flex-1 w-full h-screen relative overflow-y-auto'}>
                     <ToolBoxBar onMenuClicked={() => setDrawerOpened(!drawerOpened)} />
 
-                    <div className={'mt-14 mb-14 w-full px-4 md:px-14 py-6'}>
+                    <div className={'mt-14 flex-1 w-full px-4 lg:px-14 py-6'}>
                         {children}
                         <div className={'h-6'}></div>
                     </div>
