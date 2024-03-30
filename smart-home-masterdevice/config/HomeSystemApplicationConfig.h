@@ -18,6 +18,8 @@ class HomeSystemApplicationConfig {
 public:
     static void runChangelogsOnStartup(DbConnectionPtr dbConnection);
 
+    static void loadVirtualKeyboard(const std::string& configEnv);
+
     static void applyFont();
 
     static std::string getEnv(const std::string& envVar);

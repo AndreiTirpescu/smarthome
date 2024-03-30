@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/AppPages">
         <file>LoginPage.qml</file>
+        <file>HomePage.qml</file>
         <file>qmldir</file>
     </qresource>
 </RCC>

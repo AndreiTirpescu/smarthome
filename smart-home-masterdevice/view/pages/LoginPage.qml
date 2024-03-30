@@ -4,6 +4,7 @@ import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
 import AppComponents 1.0
 import device.access 1.0
+import navigation 1.0
 
 Page {
     id: randomRectangle
@@ -53,6 +54,7 @@ Page {
 
             onClicked: {
                 UserLogin.login(email.text, password.text);
+                Navigator.changePage('qrc:///AppPages/HomePage.qml');
             }
         }
     }

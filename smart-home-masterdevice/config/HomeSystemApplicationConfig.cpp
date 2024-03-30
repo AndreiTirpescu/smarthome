@@ -18,3 +18,10 @@ std::string config::HomeSystemApplicationConfig::getEnv(const std::string& envVa
 {
     return QProcessEnvironment::systemEnvironment().value(envVar.c_str()).toStdString();
 }
+
+void config::HomeSystemApplicationConfig::loadVirtualKeyboard(const std::string& configEnv)
+{
+    if (getEnv(configEnv) == "1") {
+        qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+    }
+}

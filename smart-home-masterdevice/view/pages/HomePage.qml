@@ -4,8 +4,10 @@ import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
 import AppComponents 1.0
 
-Item {
+Page {
+    anchors.fill: parent
+
     background: Rectangle {
-        color: "red"
+        color: "green"
     }
 }

@@ -4,6 +4,7 @@ import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
 import AppComponents 1.0
 import AppPages 1.0
+import navigation 1.0
 
 ApplicationWindow {
     id: mainWindow
@@ -22,10 +23,20 @@ ApplicationWindow {
         StackView {
             id: pageContainer
 
-            height: mainWindow.height
-            width: mainWindow.width
+            anchors.fill: parent
 
             initialItem: LoginPage {
+            }
+
+            Connections {
+                function onBackRequest() {
+                    pageContainer.pop();
+                }
+                function onPageChangeRequest(page) {
+                    pageContainer.push(page);
+                }
+
+                target: Navigator
             }
         }
     }

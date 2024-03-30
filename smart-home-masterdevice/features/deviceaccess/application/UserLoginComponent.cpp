@@ -15,7 +15,8 @@ using RequestBuilder = config::NetworkRequestBuilder;
 
 deviceaccess::UserLoginComponent::UserLoginComponent(
     QObject* parent, TokenProviderPtr accessTokenProvider, NetworkAccessPtr networkClient)
-    : accessTokenProvider(std::move(accessTokenProvider))
+    : QObject(parent)
+    , accessTokenProvider(std::move(accessTokenProvider))
     , authClient(networkClient)
 {
 }
@@ -59,6 +60,7 @@ void deviceaccess::UserLoginComponent::onNetworkResponse()
 
     accessTokenProvider->saveToken(
         data["accessToken"].toString().toStdString(), data["refreshToken"].toString().toStdString());
+
     emit loginFinished();
 }
 
