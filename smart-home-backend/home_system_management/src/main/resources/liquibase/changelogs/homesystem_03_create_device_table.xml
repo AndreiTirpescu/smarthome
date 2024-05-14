@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="HomeSysetm-02-Create-Home-Systems-Table" author="Andrei Tirpescu">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT count(*) FROM information_schema.schemata WHERE schema_name = 'home_system_management';
+            </sqlCheck>
+            <not>
+                <tableExists tableName="home_system_management" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="devices" schemaName="home_system_management">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true" />
+            </column>
+            <column name="device_catalog_id" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="home_system_id" type="uuid">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="devices"
+                                 baseTableSchemaName="home_system_management"
+                                 baseColumnNames="home_system_id"
+                                 constraintName="homeSystemDevicesFK"
+                                 referencedTableName="home_systems"
+                                 referencedTableSchemaName="home_system_management"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

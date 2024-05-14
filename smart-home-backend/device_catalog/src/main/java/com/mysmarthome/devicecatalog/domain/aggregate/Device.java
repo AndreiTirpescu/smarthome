@@ -55,7 +55,7 @@ public class Device extends AggregateRoot {
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DeviceValue> deviceValues;
 
-    public Device(DeviceId id, String name, String typeCode, String shortDescription, String description, String imageUrl) {
+    private Device(DeviceId id, String name, String typeCode, String shortDescription, String description, String imageUrl) {
         this.id = id;
         this.name = name;
         this.typeCode = typeCode;

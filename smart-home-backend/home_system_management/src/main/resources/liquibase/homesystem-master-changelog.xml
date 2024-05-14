@@ -4,8 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="classpath:/liquibase/iam-master-changelog.xml" />
-    <include file="classpath:/liquibase/devicecatalog-master-changelog.xml" />
-    <include file="classpath:/liquibase/eventstore-master-changelog.xml" />
-    <include file="classpath:/liquibase/homesystem-master-changelog.xml" />
+    <include file="changelogs/homesystem_01_create_home_systems_schema.xml" relativeToChangelogFile="true" />
+    <include file="changelogs/homesystem_02_create_home_systems_table.xml" relativeToChangelogFile="true" />
+    <include file="changelogs/homesystem_03_create_device_table.xml" relativeToChangelogFile="true" />
+
 </databaseChangeLog>
