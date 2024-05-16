@@ -9,7 +9,8 @@ import navigation 1.0
 Page {
     id: randomRectangle
 
-    signal loginSuccess
+        signal
+    loginSuccess
 
     anchors.fill: parent
 
@@ -54,27 +55,17 @@ Page {
 
             onClicked: {
                 UserLogin.login(email.text, password.text);
-                Navigator.changePage('qrc:///AppPages/HomePage.qml');
+
             }
         }
-    }
-    Rectangle {
-        id: loading
-
-        anchors.fill: parent
-        color: "#FF0000"
-        visible: false
     }
     Connections {
         function onError(errStr) {
             error_label.text = errStr;
-            loading.visible = false;
         }
+
         function onLoginFinished() {
-            loading.visible = true;
-        }
-        function onLoginStarted() {
-            loading.visible = true;
+            Navigator.changePage('qrc:///AppPages/HomePage.qml');
         }
 
         target: UserLogin

@@ -1,0 +1,9 @@
+#ifndef MDFRAMEWORKWITHTEST_CHANGELOGRUNNER_H
+#define MDFRAMEWORKWITHTEST_CHANGELOGRUNNER_H
+
+class ChangelogRunner {
+public:
+    void runChangelogs();
+};
+
+#endif // MDFRAMEWORKWITHTEST_CHANGELOGRUNNER_H
