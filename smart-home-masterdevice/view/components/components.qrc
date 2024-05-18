@@ -2,6 +2,7 @@
     <qresource prefix="/AppComponents">
         <file>Input.qml</file>
         <file>AppButton.qml</file>
+        <file>Spinner.qml</file>
         <file>qmldir</file>
     </qresource>
 </RCC>

@@ -16,7 +16,7 @@ set(QT_LINK_LIBS Qt${QT_VERSION}::Core Qt${QT_VERSION}::Quick Qt${QT_VERSION}::V
 
 set(RESOURCES_PATH ${CMAKE_SOURCE_DIR}/resources)
 set(RESOURCES_TARGET_DIR resources)
-set(QRC_FILES main.qrc view/components/components.qrc view/pages/pages.qrc)
+set(QRC_FILES main.qrc view/components/components.qrc view/pages/pages.qrc view/assets/assets.qrc)
 find_package(Qt${QT_VERSION} COMPONENTS ${QT_REQUIRED_COMPONENTS} REQUIRED)
 
 

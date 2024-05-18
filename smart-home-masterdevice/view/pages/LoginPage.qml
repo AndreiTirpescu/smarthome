@@ -6,17 +6,8 @@ import AppComponents 1.0
 import device.access 1.0
 import navigation 1.0
 
-Page {
+Item {
     id: randomRectangle
-
-        signal
-    loginSuccess
-
-    anchors.fill: parent
-
-    background: Rectangle {
-        color: "#FFFFFF"
-    }
 
     ColumnLayout {
         Layout.alignment: Qt.AlignCenter
@@ -39,8 +30,9 @@ Page {
             type: TextInput.Password
             w: 430
         }
+
         Text {
-            id: error_label
+            id: errorLabel
 
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             color: "#FF0000"
@@ -55,17 +47,54 @@ Page {
 
             onClicked: {
                 UserLogin.login(email.text, password.text);
-
             }
         }
     }
+
+    ColumnLayout {
+        id: loading
+        visible: false
+        anchors.centerIn: parent
+
+        Spinner {
+            id: loadingSpinner
+            spinnerWidth: 200
+            spinnerHeight: 200
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        }
+
+        Text {
+            id: loadingText
+            text: "Connecting your home device..."
+            color: "#3dabff"
+        }
+    }
+
+    Timer {
+        id: refreshTimer
+        interval: 2500
+        repeat: false
+
+        function delay(callBack) {
+            refreshTimer.triggered.connect(callBack)
+            refreshTimer.start();
+        }
+    }
+
     Connections {
         function onError(errStr) {
-            error_label.text = errStr;
+            errorLabel.text = errStr
+            loading.visible = false
         }
 
         function onLoginFinished() {
-            Navigator.changePage('qrc:///AppPages/HomePage.qml');
+            refreshTimer.delay(function () {
+                Navigator.changePage('qrc:///AppPages/HomePage.qml')
+            })
+        }
+
+        function onLoginStarted() {
+            loading.visible = true
         }
 
         target: UserLogin

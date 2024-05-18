@@ -5,6 +5,7 @@ import QtQuick.Layouts 6.0
 import AppComponents 1.0
 import AppPages 1.0
 import navigation 1.0
+import QtQuick.VirtualKeyboard
 
 ApplicationWindow {
     id: mainWindow
@@ -20,6 +21,10 @@ ApplicationWindow {
 
         anchors.fill: parent
 
+        background: Rectangle {
+            color: "#FFFFFF"
+        }
+
         StackView {
             id: pageContainer
 
@@ -32,6 +37,7 @@ ApplicationWindow {
                 function onBackRequest() {
                     pageContainer.pop();
                 }
+
                 function onPageChangeRequest(page) {
                     pageContainer.push(page);
                 }
@@ -39,5 +45,13 @@ ApplicationWindow {
                 target: Navigator
             }
         }
+
+        // InputPanel {
+        //     id: virtualKeyboard
+        //     width: parent.width
+        //     y: parent.height - virtualKeyboard.height
+        // }
+        //
+        // Component.onCompleted: VirtualKeyboardSettings.styleName = "retro"
     }
 }
