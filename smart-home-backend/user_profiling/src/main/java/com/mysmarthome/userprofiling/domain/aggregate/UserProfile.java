@@ -1,7 +1,10 @@
 package com.mysmarthome.userprofiling.domain.aggregate;
 
 import com.mysmarthome.domain.AggregateRoot;
+import com.mysmarthome.userprofiling.domain.events.UserProfileAddressUpdatedEvent;
 import com.mysmarthome.userprofiling.domain.events.UserProfileGeneratedForIdentityEvent;
+import com.mysmarthome.userprofiling.domain.events.UserProfilePersonalDetailsUpdatedEvent;
+import com.mysmarthome.userprofiling.domain.events.UserProfileTagUpdatedEvent;
 import com.mysmarthome.userprofiling.domain.valueobjects.Address;
 import com.mysmarthome.userprofiling.domain.valueobjects.Identity;
 import com.mysmarthome.userprofiling.domain.valueobjects.PersonaDetails;
@@ -60,15 +63,22 @@ public class UserProfile extends AggregateRoot {
         this.profileImageUrl = profileImageUrl;
     }
 
+    public ProfileTag suggestTag() {
+        return personalDetails.generateTag();
+    }
+
     public void updateTag(String tag) {
         this.tag = new ProfileTag(tag);
+        publishDomainEvent(new UserProfileTagUpdatedEvent(id.toString(), identity.id(), tag));
     }
 
     public void updatePersonalDetails(String firstName, String lastName, String middleName) {
         this.personalDetails = new PersonaDetails(firstName, lastName, middleName);
+        publishDomainEvent(new UserProfilePersonalDetailsUpdatedEvent(id.toString(), identity.id()));
     }
 
     public void updateAddress(String countryCode, String line1, String line2, String city, String county, String postalCode) {
         this.address = new Address(countryCode, line1, line2, city, county, postalCode);
+        publishDomainEvent(new UserProfileAddressUpdatedEvent(id.toString(), identity.id()));
     }
 }

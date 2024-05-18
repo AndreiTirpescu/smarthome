@@ -44,6 +44,10 @@ public class Address implements Serializable {
     }
 
     public static Address emptyAddress() {
-        return new Address(null, null, null, null, null, null);
+        return new Address(null, "", "", "", "", "");
+    }
+
+    public String country() {
+        return countryCode;
     }
 }

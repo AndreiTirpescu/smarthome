@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan(basePackages = {"com.mysmarthome.userprofiling.*"})
 @EnableJpaRepositories(basePackages = {"com.mysmarthome.userprofiling.*"})
-@EntityScan(basePackages = {"com.mysmarthome.identityandaccess.*"})
+@EntityScan(basePackages = {"com.mysmarthome.userprofiling.*"})
 @PropertySource({"classpath:user-profiling-application.properties", "classpath:user-profiling-application-local.properties"})
 public class UserProfilingModuleConfiguration {
 

@@ -53,6 +53,15 @@
             "arguments": {
                 "x-queue-type": "classic"
             }
+        },
+        {
+            "name": "userprofiling.events.listener",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-queue-type": "classic"
+            }
         }
     ],
     "bindings": [
@@ -62,6 +71,14 @@
             "destination": "domain.events.log",
             "destination_type": "queue",
             "routing_key": "domain.events.*",
+            "arguments": {}
+        },
+        {
+            "source": "domain.events.topic",
+            "vhost": "/",
+            "destination": "userprofiling.events.listener",
+            "destination_type": "queue",
+            "routing_key": "domain.events.iam*",
             "arguments": {}
         }
     ]

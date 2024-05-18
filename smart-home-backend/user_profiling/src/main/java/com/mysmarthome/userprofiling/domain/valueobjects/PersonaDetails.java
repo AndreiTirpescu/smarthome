@@ -47,7 +47,8 @@ public class PersonaDetails implements Serializable {
     }
 
     public ProfileTag generateTag() {
-        return new ProfileTag(lastName.toLowerCase() + RandomStringUtils.randomNumeric(3));
+        return new ProfileTag(firstName.toLowerCase().substring(0, 3) + lastName.toLowerCase().substring(0, 4)
+                + RandomStringUtils.randomNumeric(3));
     }
 
     public static PersonaDetails randomPersona() {

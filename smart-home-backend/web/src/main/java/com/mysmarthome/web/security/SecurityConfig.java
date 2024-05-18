@@ -4,6 +4,7 @@ import com.mysmarthome.devicecatalog.application.config.DeviceCatalogSecurityFil
 import com.mysmarthome.eventstore.application.config.EventStoreSecurityFilters;
 import com.mysmarthome.homesystemmanagement.application.config.HomeSystemManagementSecurityFilters;
 import com.mysmarthome.identityandaccess.application.config.IamSecurityFilters;
+import com.mysmarthome.userprofiling.application.security.UserProfilingSecurityFilters;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityScheme;
@@ -11,10 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -43,6 +42,8 @@ public class SecurityConfig {
 
     private final HomeSystemManagementSecurityFilters homeSystemManagementSecurityFilters;
 
+    private final UserProfilingSecurityFilters userProfilingSecurityFilters;
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         var http = httpSecurity
@@ -59,6 +60,7 @@ public class SecurityConfig {
         http = deviceCatalogSecurityFilters.withDeviceCatalogFilters(http);
         http = eventStoreSecurityFilters.withEventStoreSecurityFilters(http);
         http = homeSystemManagementSecurityFilters.withHomeSystemManagementFilters(http);
+        http = userProfilingSecurityFilters.withUserProfilingSecurityFilters(http);
 
         return http.build();
     }
