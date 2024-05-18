@@ -19,59 +19,50 @@ ApplicationWindow {
         color: "#FFFFFF"
     }
 
-
-    Flickable {
+    Loader {
+        id: pageLoader
+        anchors.centerIn: parent
         width: parent.width
         height: parent.height
-        contentWidth: parent.width
-        contentHeight: parent.height
-        flickableDirection: Flickable.VerticalFlick
 
-        Loader {
-            id: pageLoader
-            anchors.centerIn: parent
-            width: parent.width
-            height: parent.height
-
-            Connections {
-                function onPageChangeRequest(page) {
-                    pageLoader.source = page
-                }
-
-                target: Navigator
+        Connections {
+            function onPageChangeRequest(page) {
+                pageLoader.source = page
             }
+
+            target: Navigator
         }
     }
 
-    InputPanel {
-        id: virtualKeyboard
-        z: 99
-        x: 0
-        y: mainWindow.height
-        width: mainWindow.width
-
-        states: State {
-            name: "visible"
-            when: virtualKeyboard.active
-            PropertyChanges {
-                target: virtualKeyboard
-                y: mainWindow.height - virtualKeyboard.height
-            }
-        }
-
-        transitions: Transition {
-            from: ""
-            to: "visible"
-            reversible: true
-            ParallelAnimation {
-                NumberAnimation {
-                    properties: "y"
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        }
-    }
+    // InputPanel {
+    //     id: virtualKeyboard
+    //     z: 99
+    //     x: 0
+    //     y: mainWindow.height
+    //     width: mainWindow.width
+    //
+    //     states: State {
+    //         name: "visible"
+    //         when: virtualKeyboard.active
+    //         PropertyChanges {
+    //             target: virtualKeyboard
+    //             y: mainWindow.height - virtualKeyboard.height
+    //         }
+    //     }
+    //
+    //     transitions: Transition {
+    //         from: ""
+    //         to: "visible"
+    //         reversible: true
+    //         ParallelAnimation {
+    //             NumberAnimation {
+    //                 properties: "y"
+    //                 duration: 250
+    //                 easing.type: Easing.InOutQuad
+    //             }
+    //         }
+    //     }
+    // }
 
     Component.onCompleted: function () {
         pageLoader.source = "/pages/LoginPage.qml"

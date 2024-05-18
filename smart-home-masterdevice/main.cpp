@@ -8,7 +8,7 @@
 
 int main(int argc, char* argv[])
 {
-    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+    //    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
     QGuiApplication application(argc, argv);
     QQmlApplicationEngine engine;
