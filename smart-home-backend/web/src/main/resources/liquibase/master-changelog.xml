@@ -8,4 +8,5 @@
     <include file="classpath:/liquibase/devicecatalog-master-changelog.xml" />
     <include file="classpath:/liquibase/eventstore-master-changelog.xml" />
     <include file="classpath:/liquibase/homesystem-master-changelog.xml" />
+    <include file="classpath:/liquibase/profiling-changelog-master.xml" />
 </databaseChangeLog>

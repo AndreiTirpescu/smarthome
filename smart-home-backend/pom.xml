@@ -22,6 +22,7 @@
         <module>device_catalog</module>
         <module>event-store</module>
         <module>home_system_management</module>
+        <module>user_profiling</module>
     </modules>
 
     <properties>
@@ -91,6 +92,12 @@
             <dependency>
                 <groupId>com.mysmarthome</groupId>
                 <artifactId>home_system_management</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mysmarthome</groupId>
+                <artifactId>user_profiling</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
