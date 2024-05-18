@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/AppComponents">
+    <qresource prefix="/components">
         <file>Input.qml</file>
         <file>AppButton.qml</file>
         <file>Spinner.qml</file>

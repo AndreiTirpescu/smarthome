@@ -2,10 +2,9 @@ import QtQuick 6.0
 import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
-import AppComponents 1.0
-import AppPages 1.0
-import navigation 1.0
 import QtQuick.VirtualKeyboard
+import components 1.0
+import navigation 1.0
 
 ApplicationWindow {
     id: mainWindow
@@ -16,42 +15,65 @@ ApplicationWindow {
     visible: true
     width: 800
 
-    Page {
-        id: appContents
+    background: Rectangle {
+        color: "#FFFFFF"
+    }
 
-        anchors.fill: parent
 
-        background: Rectangle {
-            color: "#FFFFFF"
-        }
+    Flickable {
+        width: parent.width
+        height: parent.height
+        contentWidth: parent.width
+        contentHeight: parent.height
+        flickableDirection: Flickable.VerticalFlick
 
-        StackView {
-            id: pageContainer
-
-            anchors.fill: parent
-
-            initialItem: LoginPage {
-            }
+        Loader {
+            id: pageLoader
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
 
             Connections {
-                function onBackRequest() {
-                    pageContainer.pop();
-                }
-
                 function onPageChangeRequest(page) {
-                    pageContainer.push(page);
+                    pageLoader.source = page
                 }
 
                 target: Navigator
             }
         }
+    }
 
-        // InputPanel {
-        //     id: virtualKeyboard
-        //     width: parent.width
-        //     y: parent.height - virtualKeyboard.height
-        // }
-        //
-        // Component.onCompleted: VirtualKeyboardSettings.styleName = "retro"
+    InputPanel {
+        id: virtualKeyboard
+        z: 99
+        x: 0
+        y: mainWindow.height
+        width: mainWindow.width
+
+        states: State {
+            name: "visible"
+            when: virtualKeyboard.active
+            PropertyChanges {
+                target: virtualKeyboard
+                y: mainWindow.height - virtualKeyboard.height
+            }
+        }
+
+        transitions: Transition {
+            from: ""
+            to: "visible"
+            reversible: true
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "y"
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+    }
+
+    Component.onCompleted: function () {
+        pageLoader.source = "/pages/LoginPage.qml"
     }
 }

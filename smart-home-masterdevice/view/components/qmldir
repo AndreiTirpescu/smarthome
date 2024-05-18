@@ -1,4 +1,4 @@
-module AppComponents
+module components
 Input 1.0 Input.qml
 AppButton 1.0 AppButton.qml
 Spinner 1.0 Spinner.qml

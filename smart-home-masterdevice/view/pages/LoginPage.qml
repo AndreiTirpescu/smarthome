@@ -2,7 +2,7 @@ import QtQuick 6.0
 import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
-import AppComponents 1.0
+import components 1.0
 import device.access 1.0
 import navigation 1.0
 
@@ -89,7 +89,7 @@ Item {
 
         function onLoginFinished() {
             refreshTimer.delay(function () {
-                Navigator.changePage('qrc:///AppPages/HomePage.qml')
+                Navigator.changePage('/pages/HomePage.qml')
             })
         }
 
