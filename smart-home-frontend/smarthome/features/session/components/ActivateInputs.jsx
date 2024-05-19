@@ -35,10 +35,14 @@ export default function LoginInputs () {
 
     return (
         <>
-            <h3 className={'text-md text-start text-secondary select-none'}>Let&apos;s activate your account</h3>
-            <Input name={'key'} type={'text'} label={'Activation Key'} value={activationInput.key} onChange={onDataChange}/>
-            <Button label={'Activate account'} onClick={onSubmit} />
-            <p className={'text-xs text-red-400 font-semibold text-center'}>{error}</p>
+            <div className={'w-full flex flex-col gap-12'}>
+                <h3 className={'text-md text-start text-secondary select-none'}>Let&apos;s activate your account</h3>
+
+                <Input name={'key'} type={'text'} label={'Activation Key'} value={activationInput.key} onChange={onDataChange}/>
+
+                <Button label={'Activate account'} onClick={onSubmit} />
+            </div>
+            <p className={'text-xs text-red-400 font-semibold underline text-center'}>{error}</p>
         </>
     )
 }

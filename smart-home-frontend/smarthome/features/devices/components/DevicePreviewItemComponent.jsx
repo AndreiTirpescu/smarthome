@@ -12,10 +12,6 @@ const DevicePreviewItemComponent = ({ device }) => {
     const { deviceEvents, isLoadingEvents } = useFetchDeviceEvents(device.id)
     const { deviceValues, isLoadingValues } = useFetchDeviceValues(device.id)
 
-    useEffect(() => {
-        console.log(device.id)
-    }, [])
-
     return (
         <Card className={'hidden min-h-screen h-full lg:flex flex-col gap-8 rounded-md bg-white'}>
             <div className={'w-full flex items-center justify-center'}>

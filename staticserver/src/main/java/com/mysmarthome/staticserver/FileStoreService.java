@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -31,15 +32,17 @@ public class FileStoreService {
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public FileInfoResponse save(@NotNull(message = "file must not be null") @RequestParam("file") MultipartFile file) {
+        String originalFilename = file.getOriginalFilename();
+        if (originalFilename == null || originalFilename.isEmpty()) {
+            throw new RuntimeException("Invalid file");
+        }
+
+        String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+        String newFileName = String.format("%s.%s", UUID.randomUUID(), extension);
         try {
-            String originalFilename = file.getOriginalFilename();
-            if (originalFilename == null || originalFilename.isEmpty()) {
-                throw new RuntimeException("Invalid file");
-            }
+            Files.copy(file.getInputStream(), bucketFilePath.resolve(newFileName));
 
-            Files.copy(file.getInputStream(), bucketFilePath.resolve(originalFilename));
-
-            return new FileInfoResponse(originalFilename, String.format("/static/%s", originalFilename));
+            return new FileInfoResponse(originalFilename, String.format("/static/%s", newFileName));
         } catch (Exception ex) {
             log.error("Could not save file {}", ex.getMessage());
 

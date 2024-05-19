@@ -19,9 +19,12 @@ export default function ForgotPasswordInputs () {
 
     return (
         <>
-            <h3 className={'text-md text-start text-secondary select-none'}>Enter your email and we&apos;ll send you a recovery link</h3>
-            <Input name={'email'} type={'email'} label={'email'} value={forgotPasswordInput.email} onChange={onDataChange}/>
-            <Button label={'Send link'} onClick={onSubmit} />
+            <div className={'w-full flex flex-col gap-12'}>
+                <h3 className={'text-md text-start text-secondary select-none'}>Enter your email and we&apos;ll send you a recovery link</h3>
+                <Input name={'email'} type={'email'} label={'email'} value={forgotPasswordInput.email} onChange={onDataChange}/>
+                <Button label={'Send link'} onClick={onSubmit} />
+            </div>
+
             <Link href={'/login'} className={'text-accent-hover text-sm text-center font-semibold hover:text-accent-active cursor-pointer'}>Back to sign in</Link>
         </>
     )

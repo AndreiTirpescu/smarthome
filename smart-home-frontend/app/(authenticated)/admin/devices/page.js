@@ -14,7 +14,7 @@ const AdminDeviceManagementPage = () => {
             <div className={'w-full sm:w-1/2'}>
                 {!isLoading && <ClickableListView onItemClicked={(deviceId) => console.log(deviceId)} items={devices} propName={'device'} itemComponent={DeviceItemComponentListCard} />}
             </div>
-            {!isLoading && <DevicePreviewItemComponent device={devices[1]} />}
+            {!isLoading && <DevicePreviewItemComponent device={devices[0]} />}
         </div>
     )
 }

@@ -17,9 +17,9 @@ module.exports = {
                 secondary: '#040404',
                 primary: '#F4F5F9',
                 accent: {
-                    DEFAULT: '#3A46C8',
-                    hover: '#202772',
-                    active: '#5A64D1'
+                    DEFAULT: '#9038FF',
+                    hover: '#5c0bc0',
+                    active: '#7031c2'
                 },
                 pageBackground: '#F9F9F9',
                 menuItemActive: '#DFDFD1',

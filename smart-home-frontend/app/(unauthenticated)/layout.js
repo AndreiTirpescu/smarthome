@@ -1,10 +1,10 @@
 // eslint-disable-next-line camelcase
-import { Work_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import React from 'react'
 import '../globals.css'
 import UnauthenticatedPageLayout from '@/smarthome/features/session/components/UnauthenticatedPageLayout'
 
-const font = Work_Sans({ subsets: ['latin'] })
+const font = Inter({ subsets: ['latin'] })
 
 export const metadata = {
     title: 'Create Next App',

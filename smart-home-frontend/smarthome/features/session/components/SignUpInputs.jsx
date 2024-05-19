@@ -43,14 +43,18 @@ export default function SignUpInputs () {
 
     return (
         <>
-            <h3 className={'text-md text-start text-secondary select-none'}>Sign in to your smart home account</h3>
-            <Input name={'email'} type={'email'} label={'email'} value={signUpInput.email} onChange={onDataChanged}/>
-            <Input name={'password'} type={'password'} label={'password'} value={signUpInput.password} onChange={onDataChanged} />
-            <Input name={'confirmedPassword'} type={'password'} label={'Confirm password'} value={signUpInput.confirmedPassword} onChange={onDataChanged} />
+            <div className={'w-full flex flex-col gap-12'}>
+                <h3 className={'text-md text-start text-secondary select-none'}>Let&apos;s make a new account</h3>
+                <div className={'w-full flex flex-col gap-4'}>
+                    <Input name={'email'} type={'email'} label={'email'} value={signUpInput.email} onChange={onDataChanged}/>
+                    <Input name={'password'} type={'password'} label={'password'} value={signUpInput.password} onChange={onDataChanged} />
+                    <Input name={'confirmedPassword'} type={'password'} label={'Confirm password'} value={signUpInput.confirmedPassword} onChange={onDataChanged} />
+                </div>
+            </div>
             {error && <p className={'text-xs text-red-400 font-semibold text-center'}>{error}</p>}
             <Button label={'Continue'} onClick={onSubmit} loading={loading} />
 
-            <Link href={'/login'} className={'text-accent-hover text-sm text-center font-semibold hover:text-accent-active cursor-pointer'}>Back to sign in</Link>
+            <Link href={'/login'} className={'text-accent-hover underline text-sm text-center font-semibold hover:text-accent-active cursor-pointer'}>Back to sign in</Link>
         </>
     )
 }
