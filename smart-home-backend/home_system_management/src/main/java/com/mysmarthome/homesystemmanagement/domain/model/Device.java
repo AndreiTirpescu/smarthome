@@ -23,8 +23,6 @@ public class Device {
 
     private String deviceCatalogId;
 
-    private String name;
-
     @ManyToOne
     private HomeSystem homeSystem;
 }

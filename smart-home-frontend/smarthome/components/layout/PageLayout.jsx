@@ -10,7 +10,9 @@ export default function PageLayout ({ children }) {
     return (
         <>
             <div className="flex bg-white">
-                <AppMenu/>
+                <div className={'hidden md:block'}>
+                    <AppMenu/>
+                </div>
 
                 <main className={'flex flex-1 w-full h-screen relative overflow-y-auto'}>
                     <div className={'mt-14 flex-1 w-full px-4 lg:px-14 py-6'}>

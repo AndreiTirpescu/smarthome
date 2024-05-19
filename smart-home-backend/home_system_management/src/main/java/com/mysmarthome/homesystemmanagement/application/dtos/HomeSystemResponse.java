@@ -1,4 +1,8 @@
 package com.mysmarthome.homesystemmanagement.application.dtos;
 
-public class HomeSystemResponse {
+public record HomeSystemResponse(String id,
+                                 String identityId,
+                                 String name,
+                                 String description,
+                                 HomeSystemAddress address) {
 }

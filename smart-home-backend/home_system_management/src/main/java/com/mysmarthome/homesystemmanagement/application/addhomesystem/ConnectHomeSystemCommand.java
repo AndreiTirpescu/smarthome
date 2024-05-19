@@ -2,5 +2,5 @@ package com.mysmarthome.homesystemmanagement.application.addhomesystem;
 
 import jakarta.validation.constraints.NotNull;
 
-public record ConnectHomeSystemCommand(@NotNull String name) {
+public record ConnectHomeSystemCommand(@NotNull String name, @NotNull String identityId) {
 }

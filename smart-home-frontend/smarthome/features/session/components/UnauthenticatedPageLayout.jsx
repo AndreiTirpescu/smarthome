@@ -10,9 +10,9 @@ export default function UnauthenticatedPageLayout ({ children }) {
                 <div className={ 'absolute z-5 bg-gradient-to-t from-black to-transparent w-full h-full opacity-65 ' } />
                 <div className={'absolute w-full h-full flex flex-col justify-between'}>
                     <div className={'flex gap-4 p-4'}>
-                        <span className={ 'w-[64px] h-[4px] bg-white' }/>
-                        <span className={ 'w-[64px] h-[4px] bg-white' }/>
-                        <span className={ 'w-[64px] h-[4px] bg-white' }/>
+                        <span className={ 'w-[64px] h-[4px] bg-white rounded-full' }/>
+                        <span className={ 'w-[64px] h-[4px] rounded-full bg-alto-light' }/>
+                        <span className={ 'w-[64px] h-[4px] rounded-full bg-alto-light' }/>
                     </div>
 
                     <span className={'text-7xl font-medium text-white p-4 select-none'}>Connect with your home with ease using MySmartHome solutions</span>

@@ -10,7 +10,7 @@ export const menuItemsTop = [
     },
     {
         key: 'menu_system_management',
-        link: '/homesystemamanagement',
+        link: '/homesystem-management',
         name: 'System Management',
         icon: <HardDrive />
     },

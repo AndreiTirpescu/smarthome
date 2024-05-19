@@ -18,11 +18,32 @@
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true" primaryKey="true" />
             </column>
+            <column name="identity_id" type="varchar(36)">
+                <constraints nullable="false" />
+            </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="bigint">
+            <column name="description" type="text">
                 <constraints nullable="false" />
+            </column>
+            <column name="country_code" type="varchar(4)">
+                <constraints nullable="true" />
+            </column>
+            <column name="line1" type="varchar(128)">
+                <constraints nullable="true" />
+            </column>
+            <column name="line2" type="varchar(128)">
+                <constraints nullable="true" />
+            </column>
+            <column name="city" type="varchar(128)">
+                <constraints nullable="true" />
+            </column>
+            <column name="county" type="varchar(128)">
+                <constraints nullable="true" />
+            </column>
+            <column name="postal_code" type="varchar(9)">
+                <constraints nullable="true" />
             </column>
         </createTable>
     </changeSet>

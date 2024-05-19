@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "userprofiling.domain.events")
 @Data
-public class UserProfilingDomainEventConfiguration {
+public class HomeSystemDomainEventConfiguration {
     public String topic;
 
     public String routingKey;
