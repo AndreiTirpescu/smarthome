@@ -23,15 +23,23 @@ target_sources(${PROJECT_NAME}
         src/config/service/AppConfigLoader.h
         src/config/service/ChangelogRunner.cpp
         src/config/service/ChangelogRunner.h
-        src/device/Device.cpp
-        src/device/Device.h
+        src/device/model/Device.cpp
+        src/device/model/Device.h
+        src/device/api/device_api.cpp
+        src/device/service/DeviceSetupService.cpp
+        src/device/service/DeviceSetupService.h
+        src/device/infrastructure/MasterDeviceRepository.cpp
+        src/device/infrastructure/MasterDeviceRepository.h
+        src/device/infrastructure/HomeSystemNetworking.cpp
+        src/device/infrastructure/HomeSystemNetworking.h
+        src/device/infrastructure/HomeSystemResponse.h
         src/exceptions/exception.cpp
         src/session/api/session_api.cpp
-        src/session/infrastructure/SessionRepository.cpp
-        src/session/infrastructure/SessionRepository.h
+        src/session/infrastructure/LoginResponse.h
         src/session/infrastructure/SessionNetworking.cpp
         src/session/infrastructure/SessionNetworking.h
-        src/session/infrastructure/LoginResponse.h
+        src/session/infrastructure/SessionRepository.cpp
+        src/session/infrastructure/SessionRepository.h
         src/session/model/User.cpp
         src/session/model/User.cpp
         src/session/model/User.h
@@ -59,9 +67,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE jwt-cpp::jwt-cpp)
 
 set(public_headers
         include/config/config_api.h
+        include/device/device_api.h
+        include/device/master_device_data.h
+        include/exceptions/exception.h
         include/session/session_api.h
         include/session/session_data.h
-        include/exceptions/exception.h
 )
 
 

@@ -1,21 +1,29 @@
 #include "exceptions/exception.h"
 
-mdframework::exceptions::exception::exception(std::string message)
+mdframework::exceptions::Exception::Exception(std::string message)
     : message(std::move(message))
     , std::runtime_error(message)
 {
 }
-const char* mdframework::exceptions::exception::what() const noexcept { return message.c_str(); }
+const char* mdframework::exceptions::Exception::what() const noexcept { return message.c_str(); }
 
 mdframework::exceptions::InvalidCredentialsException::InvalidCredentialsException()
-    : exception("Invalid user credentials")
+    : Exception("Invalid user credentials")
 {
 }
 mdframework::exceptions::NetworkAccessError::NetworkAccessError()
-    : exception("Network access error")
+    : Exception("Network access error")
 {
 }
 mdframework::exceptions::StorageException::StorageException()
-    : exception("Storage exception")
+    : Exception("Storage Exception")
+{
+}
+mdframework::exceptions::InvalidSessionException::InvalidSessionException()
+    : Exception("Invalid session exception, try to reconnect")
+{
+}
+mdframework::exceptions::ErrorCreatingHomeSystem::ErrorCreatingHomeSystem()
+    : Exception("Could not create home system, please try again later")
 {
 }

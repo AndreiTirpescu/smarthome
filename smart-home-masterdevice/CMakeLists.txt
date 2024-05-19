@@ -11,8 +11,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(QT_REQUIRED_COMPONENTS Core Quick Sql VirtualKeyboard)
-set(QT_LINK_LIBS Qt${QT_VERSION}::Core Qt${QT_VERSION}::Quick Qt${QT_VERSION}::VirtualKeyboard)
+set(QT_REQUIRED_COMPONENTS Core Quick Sql VirtualKeyboard Positioning)
+set(QT_LINK_LIBS Qt${QT_VERSION}::Core Qt${QT_VERSION}::Quick Qt${QT_VERSION}::Positioning Qt${QT_VERSION}::VirtualKeyboard)
 
 set(RESOURCES_PATH ${CMAKE_SOURCE_DIR}/resources)
 set(RESOURCES_TARGET_DIR resources)

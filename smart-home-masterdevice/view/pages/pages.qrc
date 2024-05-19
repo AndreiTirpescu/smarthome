@@ -2,5 +2,6 @@
     <qresource prefix="/pages">
         <file>LoginPage.qml</file>
         <file>HomePage.qml</file>
+        <file>SetupPage.qml</file>
     </qresource>
 </RCC>

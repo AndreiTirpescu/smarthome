@@ -1,6 +1,7 @@
 #include "NavigationComponent.h"
 #include "config/config_api.h"
 #include "features/deviceaccess/UserLoginComponent.h"
+#include "features/devicesetup/DeviceSetupComponent.h"
 
 #include <QGuiApplication>
 #include <QNetworkRequest>
@@ -19,6 +20,8 @@ int main(int argc, char* argv[])
         [&](QQmlEngine*, QJSEngine*) -> QObject* { return new deviceaccess::UserLoginComponent(&application); });
     qmlRegisterSingletonType<navigation::NavigationComponent>("navigation", 1, 0, "Navigator",
         [&](QQmlEngine*, QJSEngine*) -> QObject* { return new navigation::NavigationComponent(&application); });
+    qmlRegisterSingletonType<devicesetup::DeviceSetupComponent>("device.setup", 1, 0, "DeviceSetup",
+        [&](QQmlEngine*, QJSEngine*) -> QObject* { return new devicesetup::DeviceSetupComponent(&application); });
 
     QObject::connect(&application, &QGuiApplication::aboutToQuit, []() { mdframework::config::clear_library(); });
 

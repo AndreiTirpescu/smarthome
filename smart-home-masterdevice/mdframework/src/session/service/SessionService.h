@@ -9,10 +9,10 @@ namespace mdframework::session::infrastructure {
 class SessionRepository;
 }
 
+namespace mdframework::session::service {
+
 using SessionRepositoryPtr = std::shared_ptr<mdframework::session::infrastructure::SessionRepository>;
 using SessionNetworkingPtr = std::shared_ptr<mdframework::session::infrastructure::SessionNetworking>;
-
-namespace mdframework::session::service {
 
 class SessionService {
 public:
@@ -21,6 +21,8 @@ public:
     session_data loginWithEmailAndPassword(const std::string& email, const std::string& password);
 
     session_data storeSession(const session_data& sessionData);
+
+    session_data findCurrentSession();
 
 private:
     SessionRepositoryPtr repository;

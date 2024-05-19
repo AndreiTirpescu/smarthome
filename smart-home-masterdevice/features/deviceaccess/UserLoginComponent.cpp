@@ -25,6 +25,6 @@ void deviceaccess::UserLoginComponent::login(const QString& email, const QString
     } catch (const mdframework::exceptions::InvalidCredentialsException& exception) {
         emit error("Invalid credentials");
     } catch (const mdframework::exceptions::NetworkAccessError& exception) {
-        emit error("Check your internet connections");
+        emit error("Check your internet connection");
     }
 }

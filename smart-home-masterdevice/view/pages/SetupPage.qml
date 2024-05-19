@@ -3,9 +3,8 @@ import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
 import components 1.0
-import device.access 1.0
-import navigation 1.0
 import device.setup 1.0
+import navigation 1.0
 
 Item {
     id: randomRectangle
@@ -16,19 +15,17 @@ Item {
         spacing: 24
         visible: !loading.visible
 
-        Input {
-            id: email
-
-            h: 48
-            label: "Email"
-            w: 430
+        Text {
+            id: setupText
+            text: "Set up your device"
+            Layout.alignment: Qt.AlignHCenter
         }
+
         Input {
-            id: password
+            id: name
 
             h: 48
-            label: "Password"
-            type: TextInput.Password
+            label: "Device name"
             w: 430
         }
 
@@ -47,7 +44,7 @@ Item {
             label: "Continue"
 
             onClicked: {
-                UserLogin.login(email.text, password.text);
+                DeviceSetup.setupDevice(name.text);
             }
         }
     }
@@ -66,7 +63,7 @@ Item {
 
         Text {
             id: loadingText
-            text: "Connecting your home device..."
+            text: "Setting up your home device..."
             color: "#3dabff"
         }
     }
@@ -88,20 +85,16 @@ Item {
             loading.visible = false
         }
 
-        function onLoginFinished() {
+        function onSetupFinished() {
             refreshTimer.delay(function () {
-                if (!DeviceSetup.checkDeviceSetup()) {
-                    Navigator.changePage('/pages/SetupPage.qml')
-                    return
-                }
                 Navigator.changePage('/pages/HomePage.qml')
             })
         }
 
-        function onLoginStarted() {
+        function onSetupStarted() {
             loading.visible = true
         }
 
-        target: UserLogin
+        target: DeviceSetup
     }
 }

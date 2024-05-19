@@ -1,5 +1,6 @@
 #include "SessionService.h"
 #include "config/locator/ServiceLocator.h"
+#include "exceptions/exception.h"
 #include "session/infrastructure/SessionRepository.h"
 #include <jwt-cpp/jwt.h>
 #include <spdlog/spdlog.h>
@@ -45,4 +46,17 @@ mdframework::session::session_data mdframework::session::service::SessionService
 
     return { newSession->accessToken, newSession->refreshToken, newSession->tokenExpiresAt, newSession->userId,
         newSession->email };
+}
+mdframework::session::session_data mdframework::session::service::SessionService::findCurrentSession()
+{
+    spdlog::info("[SessionService] Trying to find available session data");
+
+    auto result = repository->findAvailable();
+
+    if (result == nullptr) {
+        spdlog::error("[SessionService] No session data was found");
+        throw exceptions::InvalidSessionException();
+    }
+
+    return { result->accessToken, result->refreshToken, result->tokenExpiresAt, result->userId, result->email };
 }

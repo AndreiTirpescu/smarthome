@@ -21,4 +21,12 @@ session_data store_session(const session_data& sessionData)
 
     return sessionService->storeSession(sessionData);
 }
+
+session_data get_current_session()
+{
+    using SessionService = mdframework::session::service::SessionService;
+    const auto& sessionService = ServiceLocator::instance().resolve<SessionService>();
+
+    return sessionService->findCurrentSession();
+}
 }
