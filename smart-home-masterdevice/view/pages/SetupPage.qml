@@ -9,42 +9,64 @@ import navigation 1.0
 Item {
     id: randomRectangle
 
-    ColumnLayout {
-        Layout.alignment: Qt.AlignCenter
-        anchors.centerIn: parent
-        spacing: 24
+    RowLayout {
+        anchors.fill: parent
+        spacing: 0
         visible: !loading.visible
 
-        Text {
-            id: setupText
-            text: "Set up your device"
-            Layout.alignment: Qt.AlignHCenter
+        Image {
+            source: "/assets/login_image.jpg"
+            Layout.preferredWidth: 0.45 * parent.width
+            Layout.fillHeight: true
+            fillMode: Image.PreserveAspectCrop
+            smooth: true
+            mipmap: true
+            clip: true
         }
 
-        Input {
-            id: name
+        Item {
+            id: loginInputWrapper
 
-            h: 48
-            label: "Device name"
-            w: 430
-        }
+            Layout.preferredWidth: 0.55 * parent.width - 24
+            Layout.fillHeight: true
 
-        Text {
-            id: errorLabel
+            ColumnLayout {
+                id: inputLayout
+                anchors.centerIn: parent
+                width: parent.width
+                spacing: 32
 
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            color: "#FF0000"
-            font.pointSize: 10.5
-            font.weight: 500
-            visible: text !== undefined
-        }
-        AppButton {
-            Layout.preferredHeight: 48
-            Layout.preferredWidth: 430
-            label: "Continue"
+                Text {
+                    id: loginLabel
 
-            onClicked: {
-                DeviceSetup.setupDevice(name.text);
+                    font.pointSize: 24
+                    font.weight: 300
+                    text: "Let's set up your device!"
+                }
+
+                Input {
+                    id: name
+                    label: "Home system name"
+                    Layout.preferredWidth: parent.width
+                }
+
+                Text {
+                    id: errorLabel
+
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    color: "#FF0000"
+                    font.pointSize: 12
+                    font.weight: 500
+                    visible: text !== undefined
+                }
+                AppButton {
+                    Layout.preferredWidth: parent.width
+                    label: "Continue"
+
+                    onClicked: {
+                        DeviceSetup.setupDevice(name.text);
+                    }
+                }
             }
         }
     }
@@ -64,7 +86,7 @@ Item {
         Text {
             id: loadingText
             text: "Setting up your home device..."
-            color: "#3dabff"
+            color: "#9038FF"
         }
     }
 

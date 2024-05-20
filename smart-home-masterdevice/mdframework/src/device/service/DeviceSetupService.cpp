@@ -20,7 +20,7 @@ bool mdframework::devices::service::DeviceSetupService::verifyFirstSetup()
 
     auto result = repository->findAvailable();
 
-    if (result != nullptr) {
+    if (result == nullptr) {
         spdlog::info("[DeviceSetupService] Device setup empty");
         return false;
     }

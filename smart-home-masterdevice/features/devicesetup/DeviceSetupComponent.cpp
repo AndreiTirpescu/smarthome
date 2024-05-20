@@ -18,6 +18,7 @@ void devicesetup::DeviceSetupComponent::setupDevice(const QString& deviceName)
         mdframework::devices::setup_device_with_name(deviceName.toStdString());
     } catch (const mdframework::exceptions::Exception& exception) {
         emit error(exception.what());
+        return;
     }
     emit setupFinished();
 }

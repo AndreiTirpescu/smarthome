@@ -11,5 +11,12 @@ master_device_data setup_device_with_name(const std::string& name)
 
     return sessionService->setupDevice(name);
 }
-bool check_if_first_setup_done() { return false; }
+
+bool check_if_first_setup_done()
+{
+    using DeviceSetupService = mdframework::devices::service::DeviceSetupService;
+    const auto& sessionService = ServiceLocator::instance().resolve<DeviceSetupService>();
+
+    return sessionService->verifyFirstSetup();
+}
 }

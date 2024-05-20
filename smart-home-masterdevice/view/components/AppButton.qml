@@ -2,19 +2,24 @@ import QtQuick 6.0
 import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 
-Rectangle {
+Item {
     id: btn
 
-    property alias h: btn.height
-    property alias label: buttonName.text
-    property alias w: btn.width
+    property alias label: buttonName.text;
+    height: 48
 
-    signal clicked
+        signal
+    clicked
 
-    border.color: "#E8E8E8"
-    border.width: 1
-    color: "#3dabff"
-    radius: 6
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        border.color: "#E8E8E8"
+        border.width: 1
+        color: "#9038FF"
+        radius: 6
+        height: parent.height
+    }
 
     Text {
         id: buttonName
@@ -25,6 +30,7 @@ Rectangle {
         font.weight: 600
         padding: 4
     }
+
     MouseArea {
         anchors.fill: parent
 

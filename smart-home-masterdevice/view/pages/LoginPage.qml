@@ -10,44 +10,70 @@ import device.setup 1.0
 Item {
     id: randomRectangle
 
-    ColumnLayout {
-        Layout.alignment: Qt.AlignCenter
-        anchors.centerIn: parent
-        spacing: 24
+    RowLayout {
+        anchors.fill: parent
+        spacing: 0
         visible: !loading.visible
 
-        Input {
-            id: email
-
-            h: 48
-            label: "Email"
-            w: 430
-        }
-        Input {
-            id: password
-
-            h: 48
-            label: "Password"
-            type: TextInput.Password
-            w: 430
+        Image {
+            source: "/assets/login_image.jpg"
+            Layout.preferredWidth: 0.45 * parent.width
+            Layout.fillHeight: true
+            fillMode: Image.PreserveAspectCrop
+            smooth: true
+            mipmap: true
+            clip: true
         }
 
-        Text {
-            id: errorLabel
+        Item {
+            id: loginInputWrapper
 
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            color: "#FF0000"
-            font.pointSize: 10.5
-            font.weight: 500
-            visible: text !== undefined
-        }
-        AppButton {
-            Layout.preferredHeight: 48
-            Layout.preferredWidth: 430
-            label: "Continue"
+            Layout.preferredWidth: 0.55 * parent.width - 24
+            Layout.fillHeight: true
 
-            onClicked: {
-                UserLogin.login(email.text, password.text);
+            ColumnLayout {
+                id: inputLayout
+                anchors.centerIn: parent
+                width: parent.width
+                spacing: 32
+
+                Text {
+                    id: loginLabel
+
+                    font.pointSize: 24
+                    font.weight: 300
+                    text: "Log in"
+                }
+
+                Input {
+                    id: email
+                    label: "Email"
+                    Layout.preferredWidth: parent.width
+                }
+                Input {
+                    id: password
+                    label: "Password"
+                    type: TextInput.Password
+                    Layout.preferredWidth: parent.width
+                }
+
+                Text {
+                    id: errorLabel
+
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    color: "#FF0000"
+                    font.pointSize: 12
+                    font.weight: 500
+                    visible: text !== undefined
+                }
+                AppButton {
+                    Layout.preferredWidth: parent.width
+                    label: "Continue"
+
+                    onClicked: {
+                        UserLogin.login(email.text, password.text);
+                    }
+                }
             }
         }
     }
@@ -67,7 +93,7 @@ Item {
         Text {
             id: loadingText
             text: "Connecting your home device..."
-            color: "#3dabff"
+            color: "#9038FF"
         }
     }
 
