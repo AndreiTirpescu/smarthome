@@ -35,7 +35,7 @@ ColumnLayout {
             border.width: 1
             color: "#FFFFFF"
             radius: 6
-            height: 56
+            height: 48
         }
     }
 }

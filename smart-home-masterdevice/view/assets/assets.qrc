@@ -2,5 +2,6 @@
     <qresource prefix="/assets">
         <file>spinner.svg</file>
         <file>login_image.jpg</file>
+        <file>home_page_cover.jpg</file>
     </qresource>
 </RCC>

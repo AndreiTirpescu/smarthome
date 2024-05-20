@@ -17,7 +17,7 @@ Item {
         border.color: "#E8E8E8"
         border.width: 1
         color: "#9038FF"
-        radius: 6
+        radius: 8
         height: parent.height
     }
 
