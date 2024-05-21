@@ -8,6 +8,7 @@ import com.mysmarthome.homesystemmanagement.application.mappers.HomeSystemRespon
 import com.mysmarthome.homesystemmanagement.domain.aggregate.HomeSystem;
 import com.mysmarthome.homesystemmanagement.domain.infrastructure.IHomeSystemRepository;
 import com.mysmarthome.homesystemmanagement.domain.valueobjects.HomeSystemId;
+import com.mysmarthome.homesystemmanagement.domain.valueobjects.Identity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,6 +38,15 @@ public class HomeSystemQueryHandler {
     @Operation(security = {@SecurityRequirement(name = "TokenAuthorization")})
     public HomeSystemResponse findHomeSystemById(@PathVariable String id) {
         var homesystem = repository.findById(new HomeSystemId(id))
+                .orElseThrow(() -> new SmartHomeException(HomeSystemNotFoundById));
+
+        return responseMapper.toHomeSystemResponse(homesystem);
+    }
+
+    @GetMapping("/identity/{id}")
+    @Operation(security = {@SecurityRequirement(name = "TokenAuthorization")})
+    public HomeSystemResponse findByIdentityId(@PathVariable String id) {
+        var homesystem = repository.findByIdentity(new Identity(id))
                 .orElseThrow(() -> new SmartHomeException(HomeSystemNotFoundById));
 
         return responseMapper.toHomeSystemResponse(homesystem);
