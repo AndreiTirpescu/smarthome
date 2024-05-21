@@ -21,6 +21,7 @@ void deviceaccess::UserLoginComponent::login(const QString& email, const QString
     emit loginStarted();
     try {
         const auto sessionData = mdframework::session::login(email.toStdString(), password.toStdString());
+        mdframework::session::store_session(sessionData);
         emit loginFinished();
     } catch (const mdframework::exceptions::InvalidCredentialsException& exception) {
         emit error("Invalid credentials");

@@ -3,6 +3,7 @@ import QtQuick.Window 6.0
 import QtQuick.Controls 6.0
 import QtQuick.Layouts 6.0
 import components 1.0
+import device.setup 1.0
 
 Item {
     anchors.fill: parent
@@ -30,7 +31,7 @@ Item {
 
             Text {
                 id: homeSystemLabel
-                text: "Home System"
+                text: "Nicolina Home"
                 font.pointSize: 18
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             }
@@ -53,5 +54,22 @@ Item {
                 }
             }
         }
+    }
+
+    Timer {
+        id: refreshTimer
+        interval: 500
+        repeat: false
+
+        function delay(callBack) {
+            refreshTimer.triggered.connect(callBack)
+            refreshTimer.start();
+        }
+    }
+
+    Component.onCompleted: function () {
+        refreshTimer.delay(function () {
+            DeviceSetup.simulateDeviceConnectivity()
+        })
     }
 }

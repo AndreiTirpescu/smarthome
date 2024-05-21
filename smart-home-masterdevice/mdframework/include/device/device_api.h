@@ -6,6 +6,7 @@
 namespace mdframework::devices {
 [[maybe_unused]] bool check_if_first_setup_done();
 [[maybe_unused]] master_device_data setup_device_with_name(const std::string& name);
+[[maybe_unused]] void simulate_device_system_connections();
 }
 
 #endif

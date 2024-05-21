@@ -12,6 +12,7 @@ public:
 
     Q_INVOKABLE bool checkDeviceSetup();
     Q_INVOKABLE void setupDevice(const QString& deviceName);
+    Q_INVOKABLE void simulateDeviceConnectivity();
 
 signals:
     void setupStarted();

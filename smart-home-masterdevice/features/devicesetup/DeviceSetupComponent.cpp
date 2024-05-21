@@ -22,3 +22,13 @@ void devicesetup::DeviceSetupComponent::setupDevice(const QString& deviceName)
     }
     emit setupFinished();
 }
+
+void devicesetup::DeviceSetupComponent::simulateDeviceConnectivity()
+{
+    try {
+        mdframework::devices::simulate_device_system_connections();
+    } catch (const mdframework::exceptions::Exception& exception) {
+        emit error(exception.what());
+        return;
+    }
+}

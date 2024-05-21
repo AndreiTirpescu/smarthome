@@ -19,4 +19,12 @@ bool check_if_first_setup_done()
 
     return sessionService->verifyFirstSetup();
 }
+
+void simulate_device_system_connections()
+{
+    using DeviceSetupService = mdframework::devices::service::DeviceSetupService;
+    const auto& sessionService = ServiceLocator::instance().resolve<DeviceSetupService>();
+
+    sessionService->simulateDeviceConnection();
+}
 }

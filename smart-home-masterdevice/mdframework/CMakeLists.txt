@@ -33,6 +33,7 @@ target_sources(${PROJECT_NAME}
         src/device/infrastructure/HomeSystemNetworking.cpp
         src/device/infrastructure/HomeSystemNetworking.h
         src/device/infrastructure/HomeSystemResponse.h
+        src/device/infrastructure/DevicesResponse.h
         src/exceptions/exception.cpp
         src/session/api/session_api.cpp
         src/session/infrastructure/LoginResponse.h

@@ -44,3 +44,14 @@ mdframework::devices::master_device_data mdframework::devices::service::DeviceSe
 
     return data;
 }
+
+void mdframework::devices::service::DeviceSetupService::simulateDeviceConnection()
+{
+    const auto currentSessionData = session::get_current_session();
+    const auto availableDevices = networking->fetchDevices(currentSessionData.accessToken);
+    const auto masterDeviceData = repository->findAvailable();
+    for (const auto& it : availableDevices.devices) {
+        networking->homeSystemsV1DevicesConnect(
+            it.id, it.typeCode, currentSessionData.accessToken, masterDeviceData->homeSystemId);
+    }
+}

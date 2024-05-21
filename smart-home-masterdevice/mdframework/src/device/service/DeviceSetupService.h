@@ -22,6 +22,8 @@ public:
 
     mdframework::devices::master_device_data setupDevice(const std::string& name);
 
+    void simulateDeviceConnection();
+
 private:
     MasterDeviceRepositoryPtr repository;
     HomeSystemNetworkingPtr networking;
