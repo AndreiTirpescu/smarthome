@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="HomeSysetm-02-Create-Home-Systems-Table" author="Andrei Tirpescu">
+    <changeSet id="HomeSysetm-02-Create-Devices-Table" author="Andrei Tirpescu">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
                 SELECT count(*) FROM information_schema.schemata WHERE schema_name = 'home_system_management';
@@ -22,6 +22,18 @@
                 <constraints nullable="false" />
             </column>
             <column name="home_system_id" type="uuid">
+                <constraints nullable="false" />
+            </column>
+            <column name="device_name" type="varchar(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="current_value" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="connected_at" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="value_updated_at" type="bigint">
                 <constraints nullable="false" />
             </column>
         </createTable>

@@ -2,6 +2,7 @@ package com.mysmarthome.homesystemmanagement.domain.aggregate;
 
 import com.mysmarthome.domain.AggregateRoot;
 import com.mysmarthome.exceptions.SmartHomeException;
+import com.mysmarthome.homesystemmanagement.domain.events.DeviceConnectedToHomeSystemEvent;
 import com.mysmarthome.homesystemmanagement.domain.events.HomeSystemCreatedEvent;
 import com.mysmarthome.homesystemmanagement.domain.exceptions.HomeSystemExceptionCode;
 import com.mysmarthome.homesystemmanagement.domain.model.Device;
@@ -62,5 +63,13 @@ public class HomeSystem extends AggregateRoot {
         homeSystem.publishDomainEvent(new HomeSystemCreatedEvent(id.toString(), identityId, homeSystem.getName()));
 
         return homeSystem;
+    }
+
+    public Device connectNewDeviceToHomeSystem(String deviceCatalogId, String name) {
+        var device = Device.newlyConnectedDevice(this, deviceCatalogId, name);
+        devices.add(device);
+        publishDomainEvent(new DeviceConnectedToHomeSystemEvent(homeSystemId.toString(), deviceCatalogId, identity.id()));
+
+        return device;
     }
 }

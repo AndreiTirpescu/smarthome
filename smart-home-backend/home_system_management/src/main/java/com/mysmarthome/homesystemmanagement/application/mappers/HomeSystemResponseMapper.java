@@ -1,11 +1,15 @@
 package com.mysmarthome.homesystemmanagement.application.mappers;
 
+import com.mysmarthome.homesystemmanagement.application.dtos.DeviceResponse;
 import com.mysmarthome.homesystemmanagement.application.dtos.HomeSystemAddress;
 import com.mysmarthome.homesystemmanagement.application.dtos.HomeSystemResponse;
 import com.mysmarthome.homesystemmanagement.domain.aggregate.HomeSystem;
+import com.mysmarthome.homesystemmanagement.domain.model.Device;
 import com.mysmarthome.homesystemmanagement.domain.valueobjects.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface HomeSystemResponseMapper {
@@ -17,4 +21,9 @@ public interface HomeSystemResponseMapper {
     @Mapping(target = "id", expression = "java(homeSystem.getHomeSystemId().toString())")
     @Mapping(target = "identityId", expression = "java(homeSystem.getIdentity().id())")
     HomeSystemResponse toHomeSystemResponse(HomeSystem homeSystem);
+
+    @Mapping(target = "homeSystemId", expression = "java(device.homeSystemId())")
+    DeviceResponse toDeviceResponse(Device device);
+
+    List<DeviceResponse> toDeviceResponseList(List<Device> devices);
 }
