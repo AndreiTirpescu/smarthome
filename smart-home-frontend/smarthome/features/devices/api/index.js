@@ -11,3 +11,7 @@ export const getDeviceEvents = async (deviceId) => {
 export const getDeviceValues = async (deviceId) => {
     return await backend.get(`/devices/${deviceId}/values`)
 }
+
+export const getDeviceByTypeCode = async (typeCode) => {
+    return await backend.get(`/devices/typecode/${typeCode}`)
+}

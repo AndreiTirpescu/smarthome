@@ -3,8 +3,8 @@ import { getDeviceEvents } from '@/smarthome/features/devices/api'
 
 export const useFetchDeviceEvents = (deviceId) => {
     const [deviceData, setDeviceData] = useState({
-        deviceEvents: [],
-        isLoadingEvents: true
+        events: [],
+        loadingEvents: true
     })
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export const useFetchDeviceEvents = (deviceId) => {
                 const resp = await getDeviceEvents(deviceId)
 
                 setDeviceData({
-                    deviceEvents: resp.data, isLoadingEvents: false
+                    events: resp.data, isLoadingEvents: false
                 })
             } catch (e) {
 

@@ -2,11 +2,11 @@ import React from 'react'
 
 const AppTableHeader = ({ headers }) => {
     return (
-        <thead className={'table-auto bg-accent text-primary'}>
+        <thead className={'table-auto text-base '}>
             <tr className={'capitalize shadow-sm'}>
                 {
                     headers.map((header, idx) => (
-                        <th key={header.name} className={`text-sm text-start ${idx === 0 && 'rounded-l-md'} ${idx === headers.length - 1 && 'rounded-r-md'} p-4 select-none`}>
+                        <th key={header.name} className={'text-sm text-start py-4 border-b border-b-gray-600'}>
                             {header.name}
                         </th>
                     ))

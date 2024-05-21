@@ -15,7 +15,7 @@ export default function AppMenu () {
 
                 <div className={'flex flex-col gap-8'}>
                     <div className={'relative h-[200px] bg-red-200 rounded-md shadow-md'}>
-                        <img src={'menu_hero.jpg'}
+                        <img src={'/menu_hero.jpg'}
                             className={'w-full h-full absolute z-0 object-cover object-center rounded-md select-none'}
                             alt={'Banner Image'}/>
                         <div className={ 'rounded-md absolute z-5 bg-gradient-to-t from-black to-transparent w-full h-full opacity-65' } />

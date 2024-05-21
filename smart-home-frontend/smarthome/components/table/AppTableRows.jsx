@@ -7,7 +7,7 @@ const AppTableRows = ({ items, cellConfig, headers }) => {
             {items.map(item => (
                 <tr key={item.id} className={'shadow-sm'}>
                     {cellConfig.map((cfg, idx) => (
-                        <td key={`${item.id}_${cfg.header}`} className={`${idx === 0 && 'border-l rounded-l-md'} ${idx === headers.length - 1 && 'border-r rounded-r-md'} border-t border-b border-alto p-4`}>
+                        <td key={`${item.id}_${cfg.header}`} className={'border-t border-b border-gray-600 py-4'}>
                             {
                                 renderCell(item, cfg)
                             }

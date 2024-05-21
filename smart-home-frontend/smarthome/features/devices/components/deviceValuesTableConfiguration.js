@@ -39,6 +39,6 @@ const headers = [
     }
 ]
 
-const valuesTableConfig = { valuesCells: cells, valuesHeaders: headers }
+const valuesTableConfig = { cells, headers }
 
 export default valuesTableConfig

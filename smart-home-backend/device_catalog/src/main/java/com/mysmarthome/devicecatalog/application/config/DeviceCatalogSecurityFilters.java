@@ -12,8 +12,10 @@ public class DeviceCatalogSecurityFilters {
     public HttpSecurity withDeviceCatalogFilters(HttpSecurity http) {
         http.authorizeHttpRequests(requests ->
                 requests
-                        .requestMatchers(HttpMethod.GET, "/v1/devices", "/v1/devices**").authenticated()
-                        .requestMatchers( "/v1/devices/**", "/v1/devices", "/v1/devices**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/v1/devices/**", "/v1/devices", "/v1/devices**").authenticated()
+                        .requestMatchers(HttpMethod.POST,  "/v1/devices/**", "/v1/devices", "/v1/devices**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/v1/devices/**", "/v1/devices", "/v1/devices**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/v1/devices/**", "/v1/devices", "/v1/devices**").hasAuthority("ADMIN")
         );
 
         return http;

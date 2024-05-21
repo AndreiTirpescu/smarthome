@@ -18,6 +18,6 @@ const headers = [
     }
 ]
 
-const eventsTableConfig = { eventsCells: cells, eventsHeaders: headers }
+const eventsTableConfig = { cells, headers }
 
 export default eventsTableConfig

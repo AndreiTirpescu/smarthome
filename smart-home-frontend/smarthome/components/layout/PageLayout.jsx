@@ -14,10 +14,9 @@ export default function PageLayout ({ children }) {
                     <AppMenu/>
                 </div>
 
-                <main className={'flex flex-1 w-full h-screen relative overflow-y-auto'}>
-                    <div className={'mt-14 flex-1 w-full px-4 lg:px-14 py-6'}>
+                <main className={'flex flex-1 w-full item h-screen relative xl:justify-center overflow-y-auto'}>
+                    <div className={'flex-1 w-full xl:max-w-[1280px] p-8'}>
                         {children}
-                        <div className={'h-6'}></div>
                     </div>
                 </main>
             </div>

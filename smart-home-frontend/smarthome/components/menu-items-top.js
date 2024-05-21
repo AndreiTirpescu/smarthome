@@ -16,7 +16,7 @@ export const menuItemsTop = [
     },
     {
         key: 'Device Catalog',
-        link: '/catalog',
+        link: '/devices',
         name: 'Device Catalog',
         icon: <Cpu />
     },
@@ -32,7 +32,7 @@ export const bottomItems = [
     {
         key: 'menu_help',
         link: '/logout',
-        name: 'Logout',
+        name: 'Help and support',
         icon: <HelpCircle />
     },
     {

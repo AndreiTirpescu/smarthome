@@ -12,12 +12,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -43,8 +41,8 @@ public class CreateDeviceCommandHandler {
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(security = {@SecurityRequirement(name = "TokenAuthorization")})
     @Transactional
-    public DeviceResponse handle(@RequestParam(value = "file") MultipartFile file,
-                                 @RequestParam(value = "payload") String payload) {
+    public DeviceResponse handle(@RequestPart(value = "file") MultipartFile file,
+                                 @RequestPart(value = "payload") String payload) {
         var command = new Gson().fromJson(payload, CreateDeviceCommand.class);
 
         if (deviceRepository.existsByTypeCode(command.typeCode())) {

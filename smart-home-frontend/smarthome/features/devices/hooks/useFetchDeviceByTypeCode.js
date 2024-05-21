@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
-import { getDevicesPaged } from '@/smarthome/features/devices/api'
+import { getDeviceByTypeCode } from '@/smarthome/features/devices/api'
 
-export const useFetchDevices = ({ pageNumber, pageSize }) => {
+export const useFetchDeviceByTypeCode = ({ typeCode }) => {
     const [deviceData, setDeviceData] = useState({
-        devices: [],
+        device: {},
         isLoading: true
     })
 
     useEffect(() => {
         (async () => {
             try {
-                const resp = await getDevicesPaged({ pageNumber, pageSize })
+                const resp = await getDeviceByTypeCode(typeCode)
+
                 setDeviceData({
-                    devices: resp.data.devices, isLoading: false
+                    device: resp.data, isLoading: false
                 })
             } catch (e) {
 
